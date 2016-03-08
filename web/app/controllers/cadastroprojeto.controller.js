@@ -19,7 +19,6 @@
         vm.getFases();
         vm.getGerentesProjeto();
 
-        vm.message = null;
         vm.message = "Projeto";
 
         function getCelulas() {

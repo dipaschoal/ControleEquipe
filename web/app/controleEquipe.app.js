@@ -1,35 +1,28 @@
-  var ControleEquipeApp = angular.module('ControleEquipeApp', ['ngRoute', 'MainController', 'CadastroAlocacaoController', 'CadastroLancamentoController', 'CadastroProjetoController', 'CadastroRecursoController']);
+(function () {
+    'use strict';
+    angular.module('ControleEquipeApp', ['ngRoute'])
+        .config(AppConfig);
 
-  // configure our routes
-  ControleEquipeApp.config(['$routeProvider',
-  function ($routeProvider) {
+    AppConfig.$inject = ['$routeProvider'];
 
-          $routeProvider
-          // route for the home page
-              .when('/', {
-              templateUrl: 'index.html',
-              controller: 'MainController'
-          })
+    function AppConfig($routeProvider) {
 
-          // route for the about page
-          .when('/alocacao', {
-              templateUrl: 'partials/alocacao.html',
-              controller: 'CadastroAlocacaoController'
-          })
-
-          .when('/lancamento', {
-              templateUrl: 'partials/lancamento.html',
-              controller: 'CadastroLancamentoController'
-          })
-
-          .when('/manter/projeto', {
-              templateUrl: 'partials/manter-projeto.html',
-              controller: 'CadastroProjetoController'
-          })
-
-          .when('/manter/recurso', {
-              templateUrl: 'partials/manter-recurso.html',
-              controller: 'CadastroRecursoController'
-          });
-
-  }]);
+        $routeProvider
+            .when('/alocacao', {
+                templateUrl: 'partials/alocacao.html',
+                controller: 'CadastroAlocacaoController as cadastroAlocacaoController'
+            })
+            .when('/lancamento', {
+                templateUrl: 'partials/lancamento.html',
+                controller: 'CadastroLancamentoController as cadastroLancamentoController'
+            })
+            .when('/manter/projeto', {
+                templateUrl: 'partials/manter-projeto.html',
+                controller: 'CadastroProjetoController as cadastroProjetoController'
+            })
+            .when('/manter/recurso', {
+                templateUrl: 'partials/manter-recurso.html',
+                controller: 'CadastroRecursoController as cadastroRecursoController'
+            });
+    };
+}());

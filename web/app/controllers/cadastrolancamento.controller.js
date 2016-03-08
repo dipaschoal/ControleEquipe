@@ -19,7 +19,6 @@
         vm.getProjetos();
         vm.getRecursos();
 
-        vm.message = null;
         vm.message = "Lancamento";
 
         function getFases() {

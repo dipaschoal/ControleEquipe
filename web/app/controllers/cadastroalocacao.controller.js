@@ -16,9 +16,9 @@
         vm.getProjetos();
         vm.getRecursos();
 
-        vm.message = null;
         vm.message = "Alocacao";
 
+        console.log(vm);
 
         function getProjetos() {
             ProjetoService.getProjetos().then(isSuccess, isError);
