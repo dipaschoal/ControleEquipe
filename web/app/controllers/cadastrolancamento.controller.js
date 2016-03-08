@@ -21,6 +21,8 @@
 
         vm.message = "Lancamento";
 
+        console.log(vm);
+
         function getFases() {
             FaseService.getFases().then(isSuccess, isError);
 

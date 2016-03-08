@@ -21,6 +21,8 @@
 
         vm.message = "Projeto";
 
+        console.log(vm);
+
         function getCelulas() {
             CelulaService.getCelulas().then(isSuccess, isError);
 

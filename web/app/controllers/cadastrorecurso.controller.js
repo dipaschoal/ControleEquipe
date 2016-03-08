@@ -21,6 +21,8 @@
 
         vm.message = "Recurso";
 
+        console.log(vm);
+
         function getEmpresas() {
             EmpresaService.getEmpresas().then(isSuccess, isError);
 
