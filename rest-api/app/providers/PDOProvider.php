@@ -30,6 +30,5 @@ class PDOProvider {
         }
         return self::$connection;
     }
-    
 }
 ?>
