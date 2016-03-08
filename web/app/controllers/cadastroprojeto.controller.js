@@ -1,10 +1,10 @@
 (function () {
     'use strict';
-    angular.module('ControleEquipeApp').controller('CadastroRecursoController', CadastroRecursoController);
+    angular.module('ControleEquipeApp').controller('CadastroProjetoController', CadastroProjetoController);
 
-    CadastroRecursoController.$inject = ['CelulaService', 'FaseService', 'GerenteProjetoService', 'ProjetoService'];
+    CadastroProjetoController.$inject = ['CelulaService', 'FaseService', 'GerenteProjetoService', 'ProjetoService'];
 
-    function CadastroRecursoController(CelulaService, FaseService, GerenteProjetoService, ProjetoService) {
+    function CadastroProjetoController(CelulaService, FaseService, GerenteProjetoService, ProjetoService) {
         var vm = this;
 
         vm.celulas = [];
@@ -18,6 +18,9 @@
         vm.getCelulas();
         vm.getFases();
         vm.getGerentesProjeto();
+
+        vm.message = null;
+        vm.message = "Projeto";
 
         function getCelulas() {
             CelulaService.getCelulas().then(isSuccess, isError);

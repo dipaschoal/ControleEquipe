@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" ng-app="ControleEquipeApp">
+
+<head>
+    <script src="./assets/js/angular.min.js"></script>
+    <script src="./assets/js/angular-route.js"></script>
+    <script src="./app/controleEquipe.app.js"></script>
+
+    <script src="./app/services/celula.service.js"></script>
+    <script src="./app/services/empresa.service.js"></script>
+    <script src="./app/services/fase.service.js"></script>
+    <script src="./app/services/gerenteprojeto.service.js"></script>
+    <script src="./app/services/lancamento.service.js"></script>
+    <script src="./app/services/papelatuacao.service.js"></script>
+    <script src="./app/services/projeto.service.js"></script>
+    <script src="./app/services/recurso.service.js"></script>
+
+    <script src="./app/controllers/cadastroalocacao.controller.js"></script>
+    <script src="./app/controllers/cadastrolancamento.controller.js"></script>
+    <script src="./app/controllers/cadastroprojeto.controller.js"></script>
+    <script src="./app/controllers/cadastrorecurso.controller.js"></script>
+    <script src="./app/controllers/main.controller.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body ng-controller="MainController as mainController">
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="#alocacao"><i class="fa fa-shield"></i> Aloca&ccedil;&atilde;o</a></li>
+                    <li><a href="#lancamento"><i class="fa fa-shield"></i> Lan&ccedil;amento</a></li>
+                    <li><a href="#manter/recurso"><i class="fa fa-shield"></i> Manter Recurso</a></li>
+                    <li><a href="#manter/projeto"><i class="fa fa-shield"></i> Manter Projeto</a></li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <div id="main">
+
+        <div class="container">
+            <div class="alert alert-info">{{ mainController.message }}</div>
+        </div>
+        <!-- angular templating -->
+        <!-- this is where content will be injected -->
+        <div ng-view></div>
+
+
+    </div>
+
+</body>
+
+</html>

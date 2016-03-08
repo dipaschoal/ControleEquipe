@@ -19,6 +19,9 @@
         vm.getPapeisAtuacao();
         vm.getCelulas();
 
+        vm.message = null;
+        vm.message = "Recurso";
+
         function getEmpresas() {
             EmpresaService.getEmpresas().then(isSuccess, isError);
 

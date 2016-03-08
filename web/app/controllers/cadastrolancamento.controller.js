@@ -7,7 +7,7 @@
     function CadastroLancamentoController(FaseService, LancamentoService, ProjetoService, RecursoService) {
         var vm = this;
 
-        vm.fases[];
+        vm.fases = [];
         vm.projetos = [];
         vm.recursos = [];
 
@@ -18,6 +18,9 @@
         vm.getFases();
         vm.getProjetos();
         vm.getRecursos();
+
+        vm.message = null;
+        vm.message = "Lancamento";
 
         function getFases() {
             FaseService.getFases().then(isSuccess, isError);
