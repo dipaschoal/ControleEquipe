@@ -1,9 +1,11 @@
 <!doctype html>
-<html lang="en" ng-app="ControleEquipeApp">
+<html lang="en">
 
 <head>
+
     <script src="./assets/js/angular.min.js"></script>
     <script src="./assets/js/angular-route.js"></script>
+
     <script src="./app/controleEquipe.app.js"></script>
 
     <script src="./app/services/celula.service.js"></script>
@@ -23,7 +25,7 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body ng-controller="MainController as mainController">
+<body ng-app="ControleEquipeApp">
     <header>
         <nav class="navbar navbar-default">
             <div class="container">
@@ -41,15 +43,12 @@
 
 
     <div id="main">
-
         <div class="container">
-            <div class="alert alert-info">{{ mainController.message }}</div>
+            <div class="alert alert-info">{{ message }}</div>
         </div>
         <!-- angular templating -->
         <!-- this is where content will be injected -->
         <div ng-view></div>
-
-
     </div>
 
 </body>
