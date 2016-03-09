@@ -13,3 +13,12 @@
 .label {
     width: 100%;
 }
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}

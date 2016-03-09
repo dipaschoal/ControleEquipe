@@ -1,3 +1,68 @@
-<div class="container">
-    <div class="alert alert alert-danger">{{ cadastroProjetoController.message }}</div>
+<div>
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="display-3">Cadastro de Projetos</h2>
+            <p class="lead">Cadastro de projetos executados pela equipe CDS Sinistro Auto.</p>
+        </div>
+    </div>
+    <div class="container">
+        <form name="cadastroProjetoForm">
+            <fieldset class="fieldSet">
+                <legend>Informe os dados do projeto.</legend>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="nomeprojeto">Nome do Projeto:</label>
+                        <input class="form-control" type="text" name="nomeprojeto" ng-model="cadastroProjetoController.projeto.nomeprojeto" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="numeroprojeto">N&uacute;mero do Projeto:</label>
+                        <input class="form-control" type="text" name="numeroprojeto" ng-model="cadastroProjetoController.projeto.numeroprojeto" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="numeroprojeto">Fase:</label>
+                        <select class="form-control" name="faseSelect" ng-model="cadastroProjetoController.projeto.idfase" ng-options="fase.idfase as fase.descricaofase for fase in cadastroProjetoController.fases track by fase.idfase" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="gerenteProjetoSelect">Gerente de Projeto:</label>
+                        <select class="form-control" name="gerenteProjetoSelect" ng-model="cadastroProjetoController.projeto.idgerenteprojeto" ng-options="gerenteProjeto.idgerenteprojeto as gerenteProjeto.nomegp for gerenteProjeto in cadastroProjetoController.gerentesProjeto track by gerenteProjeto.idgerenteprojeto" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="celulaSelect">C&eacute;lula do Projeto:</label>
+                        <select class="form-control" name="celulaSelect" ng-model="cadastroProjetoController.projeto.idcelula" ng-options="celula.idcelula as celula.nomecelula for celula in cadastroProjetoController.celulas track by celula.idcelula" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroProjetoForm.$invalid && !cadastroProjetoForm.$touch" ng-hide="cadastroController.isEdicao" ng-click="cadastroProjetoController.salvarLancamento()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+                        </button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroProjetoController.$invalid && !cadastroProjetoController.$touch" ng-show="cadastroProjetoController.isEdicao" ng-click="cadastroProjetoController.salvarLancamento()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Editar
+                        </button>
+
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <button type="button" class="btn btn-secondary" ng-click="cadastroProjetoController.limparCadastro()">
+                            <span class="glyphicon glyphicon-erase"></span> Limpar
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <div class="alert alert alert-info">
+            <p>nomeprojeto: {{ cadastroProjetoController.projeto.nomeprojeto }}</p>
+            <p>numeroprojeto: {{ cadastroProjetoController.projeto.numeroprojeto }}</p>
+            <p>idfase: {{ cadastroProjetoController.projeto.idfase }}</p>
+            <p>idgerenteprojeto: {{ cadastroProjetoController.projeto.idgerenteprojeto }}</p>
+            <p>idcelula: {{ cadastroProjetoController.projeto.idcelula }}</p>
+        </div>
+    </div>
 </div>
