@@ -6,30 +6,30 @@ require_once "app/providers/PDOProvider.php";
     use App\Provider\PDOProvider;
     use \PDO;
 
-class GerenteProjetoController {
+class AtividadeRecursoController {
 
 //	private $app;
-    
+
 	public function __construct() {
 //        $this->app = \Slim\Slim::getInstance();
     }
 
-    function getGerentesProjeto() {
-        
+    function getAtividadesRecurso() {
+
         $app = \Slim\Slim::getInstance();
         $connection = PDOProvider::getConnection();
-        
+
         try{
 
-            $sth = $connection->prepare("SELECT * FROM gerenteprojeto");
+            $sth = $connection->prepare("SELECT * FROM atividaderecurso");
             $sth->execute();
 
-            $gerentesProjeto = $sth->fetchAll(PDO::FETCH_OBJ);
+            $atividadesRecurso = $sth->fetchAll(PDO::FETCH_OBJ);
 
-            if($gerentesProjeto) {
+            if($atividadesRecurso) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($gerentesProjeto);
+                echo json_encode($atividadesRecurso );
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);

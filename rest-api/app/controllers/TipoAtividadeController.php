@@ -1,3 +1,4 @@
+
 <?php
 namespace App\Controller;
 
@@ -6,30 +7,30 @@ require_once "app/providers/PDOProvider.php";
     use App\Provider\PDOProvider;
     use \PDO;
 
-class ProjetoController {
+class TipoAtividadeController {
 
 //	private $app;
-    
+
 	public function __construct() {
 //        $this->app = \Slim\Slim::getInstance();
     }
 
-    function getProjetos() {
-        
+    function getTiposAtividade() {
+
         $app = \Slim\Slim::getInstance();
         $connection = PDOProvider::getConnection();
-        
+
         try{
 
-            $sth = $connection->prepare("SELECT * FROM projeto");
+            $sth = $connection->prepare("SELECT * FROM tipoatividade");
             $sth->execute();
 
-            $projetos = $sth->fetchAll(PDO::FETCH_OBJ);
+            $tiposAtividade = $sth->fetchAll(PDO::FETCH_OBJ);
 
-            if($projetos) {
+            if($tiposAtividade) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($projetos);
+                echo json_encode($tiposAtividade);
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);
