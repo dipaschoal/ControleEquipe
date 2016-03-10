@@ -12,7 +12,10 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label class="control-label" for="tipoAtividadeSelect">Tipo de Atividade:</label>
-                        <select class="form-control" name="tipoAtividadeSelect" ng-model="cadastroAtividadeController.atividade.idtipoatividade" ng-options="tipoatividade.idtipoatividade as tipoatividade.descricaotipoatividade for tipoatividade in cadastroAtividadeController.tipoAtividades track by tipoatividade.idtipoatividade" ng-change="cadastroAtividadeController.limpar()" required>
+                        <select class="form-control" name="teste" ng-model="cadastroAtividadeController.atividade.idtipoatividade" ng-options="tipoatividade.idtipoatividade as tipoatividade.descricaotipoatividade for tipoatividade in cadastroAtividadeController.tipoAtividades track by tipoatividade.idtipoatividade" ng-change="cadastroAtividadeController.limparTipoAtividade()" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                        <select class="form-control" name="tipoAtividadeSelect" ng-model="cadastroAtividadeController.atividade.idtipoatividade" ng-options="tipoatividade.idtipoatividade as tipoatividade.descricaotipoatividade for tipoatividade in cadastroAtividadeController.tipoAtividades track by tipoatividade.idtipoatividade" ng-change="cadastroAtividadeController.limparTipoAtividade()" required>
                             <option value="" disabled>- Selecione -</option>
                         </select>
                     </div>
@@ -47,18 +50,101 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 col-sm-12">
-                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-hide="cadastroController.isEdicao" ng-click="cadastroAtividadeController.addAtividade()">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-hide="cadastroAtividadeController.isEdicao" ng-click="cadastroAtividadeController.addAtividade()">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
                         </button>
                         <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-show="cadastroAtividadeController.isEdicao" ng-click="cadastroAtividadeController.addAtividade()">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Editar
                         </button>
-
                     </div>
                     <div class="form-group col-md-6 col-sm-12">
                         <button type="button" class="btn btn-secondary" ng-click="cadastroAtividadeController.limparCadastro()">
                             <span class="glyphicon glyphicon-erase"></span> Limpar
                         </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 bodycontainer scrollable">
+                        <table class="table table-hover table-scrollable" ng-show="cadastroAtividadeController.atividades.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAtividadeController.sortType = 'nomeatividade' ; cadastroAtividadeController.sortReverse = !cadastroAtividadeController.sortReverse">Nome Atividade
+                                            <span ng-show="cadastroAtividadeController.sortType == 'nomeatividade' && !cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAtividadeController.sortType == 'nomeatividade' && cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAtividadeController.sortType = 'descricaotipoatividade' ; cadastroAtividadeController.sortReverse = !cadastroAtividadeController.sortReverse">Tipo Atividade
+                                            <span ng-show="cadastroAtividadeController.sortType == 'descricaotipoatividade' && !cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAtividadeController.sortType == 'descricaotipoatividade' && cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAtividadeController.sortType = 'nomecelula' ; cadastroAtividadeController.sortReverse = !cadastroAtividadeController.sortReverse">
+                                            C&eacute;lula
+                                            <span ng-show="cadastroAtividadeController.sortType == 'nomecelula' && !cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAtividadeController.sortType == 'nomecelula' && cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAtividadeController.sortType = 'nomeresponsavel' ; cadastroAtividadeController.sortReverse = !cadastroAtividadeController.sortReverse">
+                                            Respons&aacute;vel
+                                            <span ng-show="cadastroAtividadeController.sortType == 'nomeresponsavel' && !cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAtividadeController.sortType == 'nomeresponsavel' && cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAtividadeController.sortType = 'descricaofase' ; cadastroAtividadeController.sortReverse = !cadastroAtividadeController.sortReverse">
+                                            Fase
+                                            <span ng-show="cadastroAtividadeController.sortType == 'descricaofase' && !cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAtividadeController.sortType == 'descricaofase' && cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAtividadeController.sortType = 'numeroatividade' ; cadastroAtividadeController.sortReverse = !cadastroAtividadeController.sortReverse">
+                                            N&uacute;mero Atividade
+                                            <span ng-show="cadastroAtividadeController.sortType == 'numeroatividade' && !cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAtividadeController.sortType == 'numeroatividade' && cadastroAtividadeController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="atividade in cadastroAtividadeController.atividades | orderBy:cadastroAtividadeController.sortType:cadastroAtividadeController.sortReverse track by $index">
+                                    <th class="col-md-2">
+                                        {{atividade.nomeatividade}}
+                                    </th>
+                                    <td class="col-md-2">
+                                        {{atividade.descricaotipoatividade}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{atividade.nomecelula}}
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{atividade.nomeresponsavel}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{atividade.descricaofase}}
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{atividade.numeroatividade}}
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAtividadeController.editarAtividade(atividade)">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAtividadeController.removerLancamento(atividade)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </fieldset>

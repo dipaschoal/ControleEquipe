@@ -13,7 +13,9 @@
         vm.atividades = [];
         vm.tipoAtividades = [];
 
-        vm.limpar = limpar;
+        vm.limparTipoAtividade = limparTipoAtividade;
+        vm.limparCadastro = limparCadastro;
+        vm.sortTable = sortTable;
 
         vm.getCelulas = getCelulas;
         vm.getFases = getFases;
@@ -21,6 +23,7 @@
 
         vm.getAtividades = getAtividades;
         vm.addAtividade = addAtividade;
+        vm.editarAtividade = editarAtividade;
 
         vm.getTiposAtividade = getTiposAtividade;
 
@@ -29,7 +32,7 @@
         vm.getResponsaveis();
         vm.getAtividades();
         vm.getTiposAtividade();
-
+        vm.sortTable();
         vm.message = "Atividade";
 
         console.log(vm);
@@ -90,8 +93,8 @@
             function isSuccess(response) {
                 //TODO: carregar a lista de atividades
                 vm.message = "Salvo com sucesso";
-                vm.atividade = null;
                 vm.atividade = angular.copy(response.data);
+                vm.isEdicao = false;
             }
 
             function isError(response) {
@@ -112,9 +115,26 @@
         }
 
 
-        function limpar() {
+        function limparTipoAtividade() {
             vm.atividade.idfase = null;
             vm.atividade.numeroatividade = null;
         }
+
+        function limparCadastro() {
+            vm.atividade = null;
+            vm.isEdicao = false;
+        }
+
+        function sortTable() {
+            vm.sortType = 'nomeatividade';
+            vm.sortReverse = true;
+        }
+
+        function editarAtividade(atividadeToUpdate) {
+
+            vm.atividade = atividadeToUpdate;
+            vm.isEdicao = true;
+        }
+
     }
 }());

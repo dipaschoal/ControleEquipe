@@ -22,3 +22,15 @@
     padding-top: 18px;
     padding-bottom: 18px;
 }
+
+.bodycontainer {
+    max-height: 450px;
+    width: 100%;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.table-scrollable {
+    margin: 0;
+    padding: 0;
+}

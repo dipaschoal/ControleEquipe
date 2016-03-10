@@ -21,7 +21,26 @@ class AtividadeController {
 
         try{
 
-            $sth = $connection->prepare("SELECT * FROM atividade");
+            $sth = $connection->prepare("SELECT atividade.idatividade
+                                                ,atividade.idtipoatividade
+                                                ,tipoatividade.descricaotipoatividade
+                                                ,atividade.nomeatividade
+                                                ,atividade.numeroatividade
+                                                ,atividade.idfase
+                                                ,fase.descricaofase
+                                                ,atividade.idresponsavel
+                                                ,responsavel.nomeresponsavel
+                                                ,atividade.idcelula
+                                                ,celula.nomecelula
+                                        FROM atividade
+                                        INNER JOIN tipoatividade
+                                            ON atividade.idtipoatividade = tipoatividade.idtipoatividade
+                                        INNER JOIN responsavel
+                                            ON atividade.idresponsavel = responsavel.idresponsavel
+                                        INNER JOIN celula
+                                            ON atividade.idcelula = celula.idcelula
+                                        INNER JOIN fase
+                                            ON atividade.idfase = fase.idfase");
             $sth->execute();
 
             $atividades = $sth->fetchAll(PDO::FETCH_OBJ);
