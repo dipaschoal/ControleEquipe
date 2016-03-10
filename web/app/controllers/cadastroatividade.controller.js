@@ -2,9 +2,9 @@
     'use strict';
     angular.module('ControleEquipeApp').controller('CadastroAtividadeController', CadastroAtividadeController);
 
-    CadastroAtividadeController.$inject = ['CelulaService', 'FaseService', 'ResponsavelService', 'AtividadeService','TipoAtividadeService'];
+    CadastroAtividadeController.$inject = ['CelulaService', 'FaseService', 'ResponsavelService', 'AtividadeService', 'TipoAtividadeService'];
 
-    function CadastroAtividadeController(CelulaService, FaseService, ResponsavelService, AtividadeService,TipoAtividadeService) {
+    function CadastroAtividadeController(CelulaService, FaseService, ResponsavelService, AtividadeService, TipoAtividadeService) {
         var vm = this;
 
         vm.celulas = [];
@@ -13,10 +13,15 @@
         vm.atividades = [];
         vm.tipoAtividades = [];
 
+        vm.limpar = limpar;
+
         vm.getCelulas = getCelulas;
         vm.getFases = getFases;
         vm.getResponsaveis = getResponsaveis;
+
         vm.getAtividades = getAtividades;
+        vm.addAtividade = addAtividade;
+
         vm.getTiposAtividade = getTiposAtividade;
 
         vm.getCelulas();
@@ -77,6 +82,23 @@
             }
         }
 
+        function addAtividade() {
+            AtividadeService.addAtividade(vm.atividade).then(isSuccess, isError);
+
+            console.log(angular.toJson(vm.atividade));
+
+            function isSuccess(response) {
+                //TODO: carregar a lista de atividades
+                vm.message = "Salvo com sucesso";
+                vm.atividade = null;
+                vm.atividade = angular.copy(response.data);
+            }
+
+            function isError(response) {
+                console.log("Erro ao salvar a atividade.");
+            }
+        }
+
         function getTiposAtividade() {
             TipoAtividadeService.getTiposAtividade().then(isSuccess, isError);
 
@@ -87,6 +109,12 @@
             function isError(response) {
                 console.log("Erro ao carregar os tipos de atividades.");
             }
+        }
+
+
+        function limpar() {
+            vm.atividade.idfase = null;
+            vm.atividade.numeroatividade = null;
         }
     }
 }());

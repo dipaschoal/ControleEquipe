@@ -10,4 +10,8 @@ $app->get('/atividades', function() use($atividadeController){
     $atividadeController->getAtividades();
 });
 
+$app->post('/atividades', function() use($atividadeController){
+    $atividadeController->addAtividade();
+});
+
 ?>

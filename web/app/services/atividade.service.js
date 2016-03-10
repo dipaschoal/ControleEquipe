@@ -7,13 +7,17 @@
     function AtividadeService($http) {
 
         var service = {
-            getAtividades: getAtividades
+            getAtividades: getAtividades,
+            addAtividade: addAtividade
         };
         return service;
 
         function getAtividades() {
             return $http.get('http://localhost/ControleEquipe/rest-api/atividades');
         }
-    }
 
+        function addAtividade(atividade) {
+            return $http.post('http://localhost/ControleEquipe/rest-api/atividades', atividade);
+        }
+    }
 }());
