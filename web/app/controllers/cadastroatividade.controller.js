@@ -93,8 +93,8 @@
             function isSuccess(response) {
                 //TODO: carregar a lista de atividades
                 vm.message = "Salvo com sucesso";
-                vm.atividade = angular.copy(response.data);
                 vm.isEdicao = false;
+                vm.getAtividades();
             }
 
             function isError(response) {

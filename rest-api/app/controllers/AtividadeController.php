@@ -5,6 +5,7 @@ require_once "app/providers/PDOProvider.php";
 
     use App\Provider\PDOProvider;
     use \PDO;
+    use \PDOException;
 
 class AtividadeController {
 
@@ -55,6 +56,8 @@ class AtividadeController {
                 throw new PDOException('No records found.');
             }
         } catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        } catch (Exception $e) {
             $app->response()->setStatus(404);
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
