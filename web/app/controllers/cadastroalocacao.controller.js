@@ -2,29 +2,35 @@
     'use strict';
     angular.module('ControleEquipeApp').controller('CadastroAlocacaoController', CadastroAlocacaoController);
 
-    CadastroAlocacaoController.$inject = ['ProjetoService', 'RecursoService'];
+    CadastroAlocacaoController.$inject = ['AtividadeService', 'RecursoService', 'PapelAtuacaoService', 'AtividadeRecursoService'];
 
-    function CadastroAlocacaoController(ProjetoService, RecursoService) {
+    function CadastroAlocacaoController(AtividadeService, RecursoService, PapelAtuacaoService, AtividadeRecursoService) {
         var vm = this;
 
-        vm.projetos = [];
+        vm.atividades = [];
         vm.recursos = [];
+        vm.papeisAtuacao = [];
+        vm.atividadesRecurso = [];
 
-        vm.getProjetos = getProjetos;
+        vm.getAtividades = getAtividades;
         vm.getRecursos = getRecursos;
+        vm.getPapeisAtuacao = getPapeisAtuacao;
+        vm.getAtividadesRecurso = getAtividadesRecurso;
 
-        vm.getProjetos();
+        vm.getAtividades();
         vm.getRecursos();
+        vm.getPapeisAtuacao();
+        vm.getAtividadesRecurso();
 
         vm.message = "Alocacao";
 
         console.log(vm);
 
-        function getProjetos() {
-            ProjetoService.getProjetos().then(isSuccess, isError);
+        function getAtividades() {
+            AtividadeService.getAtividades().then(isSuccess, isError);
 
             function isSuccess(response) {
-                vm.projetos = response.data;
+                vm.atividades = response.data;
             }
 
             function isError(response) {
@@ -41,6 +47,30 @@
 
             function isError(response) {
                 console.log("Erro ao carregar os recursos.");
+            }
+        }
+
+        function getPapeisAtuacao() {
+            PapelAtuacaoService.getPapeisAtuacao().then(isSuccess, isError);
+
+            function isSuccess(response) {
+                vm.papeisAtuacao = response.data;
+            }
+
+            function isError(response) {
+                console.log("Erro ao carregar os papeis de atuacao.");
+            }
+        }
+
+        function getAtividadesRecurso() {
+            AtividadeRecursoService.getAtividadesRecurso().then(isSuccess, isError);
+
+            function isSuccess(response) {
+                vm.atividadesRecurso = response.data;
+            }
+
+            function isError(response) {
+                console.log("Erro ao carregar as atividade do recurso.");
             }
         }
     }

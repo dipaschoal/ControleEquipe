@@ -2,22 +2,25 @@
     'use strict';
     angular.module('ControleEquipeApp').controller('CadastroLancamentoController', CadastroLancamentoController);
 
-    CadastroLancamentoController.$inject = ['FaseService', 'LancamentoService', 'ProjetoService', 'RecursoService'];
+    CadastroLancamentoController.$inject = ['FaseService', 'LancamentoService', 'AtividadeService', 'RecursoService', 'AtividadeRecursoService'];
 
-    function CadastroLancamentoController(FaseService, LancamentoService, ProjetoService, RecursoService) {
+    function CadastroLancamentoController(FaseService, LancamentoService, AtividadeService, RecursoService, AtividadeRecursoService) {
         var vm = this;
 
         vm.fases = [];
-        vm.projetos = [];
+        vm.atividades = [];
         vm.recursos = [];
+        vm.atividadeRecurso = [];
 
         vm.getFases = getFases
-        vm.getProjetos = getProjetos;
+        vm.getAtividades = getAtividades;
         vm.getRecursos = getRecursos;
+        vm.getAtividadesRecurso = getAtividadesRecurso;
 
         vm.getFases();
-        vm.getProjetos();
+        vm.getAtividades();
         vm.getRecursos();
+        vm.getAtividadesRecurso();
 
         vm.message = "Lancamento";
 
@@ -35,15 +38,15 @@
             }
         }
 
-        function getProjetos() {
-            ProjetoService.getProjetos().then(isSuccess, isError);
+        function getAtividades() {
+            AtividadeService.getAtividades().then(isSuccess, isError);
 
             function isSuccess(response) {
-                vm.projetos = response.data;
+                vm.atividades = response.data;
             }
 
             function isError(response) {
-                console.log("Erro ao carregar os projetos.");
+                console.log("Erro ao carregar as atividades.");
             }
         }
 
@@ -56,6 +59,18 @@
 
             function isError(response) {
                 console.log("Erro ao carregar os recursos.");
+            }
+        }
+
+        function getAtividadesRecurso() {
+            AtividadeRecursoService.getAtividadesRecurso().then(isSuccess, isError);
+
+            function isSuccess(response) {
+                vm.atividadesRecurso = response.data;
+            }
+
+            function isError(response) {
+                console.log("Erro ao carregar as atividade do recurso.");
             }
         }
     }

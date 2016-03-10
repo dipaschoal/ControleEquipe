@@ -1,0 +1,74 @@
+<div>
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="display-3">Cadastro de Atividades</h2>
+            <p class="lead">Cadastro de atividades administrativas, ou em projetos executados pela equipe CDS Sinistro Auto.</p>
+        </div>
+    </div>
+    <div class="container">
+        <form name="cadastroAtividadeForm">
+            <fieldset class="fieldSet">
+                <legend>Informe os dados da atividade.</legend>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="tipoAtividadeSelect">Tipo de Atividade:</label>
+                        <select class="form-control" name="tipoAtividadeSelect" ng-model="cadastroAtividadeController.atividade.idtipoatividade" ng-options="tipoatividade.idtipoatividade as tipoatividade.descricaotipoatividade for tipoatividade in cadastroAtividadeController.tipoAtividades track by tipoatividade.idtipoatividade" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="nomeatividade">Nome do Atividade:</label>
+                        <input class="form-control" type="text" name="nomeatividade" ng-model="cadastroAtividadeController.atividade.nomeatividade" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="celulaSelect">C&eacute;lula da Atividade:</label>
+                        <select class="form-control" name="celulaSelect" ng-model="cadastroAtividadeController.atividade.idcelula" ng-options="celula.idcelula as celula.nomecelula for celula in cadastroAtividadeController.celulas track by celula.idcelula" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="responsaveloSelect">Respons&aacute;vel:</label>
+                        <select class="form-control" name="responsavelSelect" ng-model="cadastroAtividadeController.atividade.idresponsavel" ng-options="responsavel.idresponsavel as responsavel.nomeresponsavel for responsavel in cadastroAtividadeController.responsaveis track by responsavel.idresponsavel" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" ng-show="cadastroAtividadeController.atividade.idtipoatividade==1">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="faseSelect">Fase:</label>
+                        <select class="form-control" name="faseSelect" ng-model="cadastroAtividadeController.atividade.idfase" ng-options="fase.idfase as fase.descricaofase for fase in cadastroAtividadeController.fases track by fase.idfase" ng-required='cadastroAtividadeController.atividade.idtipoatividade==1'>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="numeroatividade">N&uacute;mero do Atividade:</label>
+                        <input class="form-control" type="text" name="numeroprojeto" ng-model="cadastroAtividadeController.atividade.numeroatividade" ng-required='cadastroAtividadeController.atividade.idtipoatividade==1'>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-hide="cadastroController.isEdicao" ng-click="cadastroAtividadeController.salvarLancamento()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+                        </button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-show="cadastroAtividadeController.isEdicao" ng-click="cadastroAtividadeController.salvarLancamento()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Editar
+                        </button>
+
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <button type="button" class="btn btn-secondary" ng-click="cadastroAtividadeController.limparCadastro()">
+                            <span class="glyphicon glyphicon-erase"></span> Limpar
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <div class="alert alert alert-info">
+            <p>nomeprojeto: {{ cadastroAtividadeController.atividade.nomeatividade }}</p>
+            <p>idcelula: {{ cadastroAtividadeController.atividade.idcelula }}</p>
+            <p>idresponsavel: {{ cadastroAtividadeController.atividade.idresponsavel }}</p>
+            <p>idfase: {{ cadastroAtividadeController.atividade.idfase }}</p>
+            <p>numeroatividade: {{ cadastroAtividadeController.atividade.numeroatividade }}</p>
+        </div>
+    </div>
+</div>

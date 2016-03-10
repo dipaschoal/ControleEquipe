@@ -1,4 +1,3 @@
-
 <?php
 namespace App\Controller;
 
@@ -30,7 +29,7 @@ class ResponsavelController {
             if($responsaveis) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($gerentesProjeto);
+                echo json_encode($responsaveis);
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);
