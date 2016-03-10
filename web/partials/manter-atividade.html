@@ -12,8 +12,10 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label class="control-label" for="tipoAtividadeSelect">Tipo de Atividade:</label>
-                        <select class="form-control" name="teste" ng-model="cadastroAtividadeController.atividade.idtipoatividade" ng-options="tipoatividade.idtipoatividade as tipoatividade.descricaotipoatividade for tipoatividade in cadastroAtividadeController.tipoAtividades track by tipoatividade.idtipoatividade" ng-change="cadastroAtividadeController.limparTipoAtividade()" required>
+
+                        <select class="form-control" name="idtipoatividade" ng-model="cadastroAtividadeController.atividade.idtipoatividade">
                             <option value="" disabled>- Selecione -</option>
+                            <option value="{{tipoAtividade.idtipoatividade}}" ng-repeat="tipoAtividade in cadastroAtividadeController.tipoAtividades">{{tipoAtividade.descricaotipoatividade}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
@@ -22,22 +24,25 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label class="control-label" for="celulaSelect">C&eacute;lula da Atividade:</label>
-                        <select class="form-control" name="celulaSelect" ng-model="cadastroAtividadeController.atividade.idcelula" ng-options="celula.idcelula as celula.nomecelula for celula in cadastroAtividadeController.celulas track by celula.idcelula" required>
+                        <select class="form-control" name="celulaSelect" ng-model="cadastroAtividadeController.atividade.idcelula">
                             <option value="" disabled>- Selecione -</option>
+                            <option value="{{celula.idcelula}}" ng-repeat="celula in cadastroAtividadeController.celulas">{{celula.nomecelula}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label class="control-label" for="responsaveloSelect">Respons&aacute;vel:</label>
-                        <select class="form-control" name="responsavelSelect" ng-model="cadastroAtividadeController.atividade.idresponsavel" ng-options="responsavel.idresponsavel as responsavel.nomeresponsavel for responsavel in cadastroAtividadeController.responsaveis track by responsavel.idresponsavel" required>
+                        <select class="form-control" name="responsavelSelect" ng-model="cadastroAtividadeController.atividade.idresponsavel">
                             <option value="" disabled>- Selecione -</option>
+                            <option value="{{responsavel.idresponsavel}}" ng-repeat="responsavel in cadastroAtividadeController.responsaveis">{{responsavel.nomeresponsavel}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="row" ng-show="cadastroAtividadeController.atividade.idtipoatividade==1">
                     <div class="form-group col-md-6">
                         <label class="control-label" for="faseSelect">Fase:</label>
-                        <select class="form-control" name="faseSelect" ng-model="cadastroAtividadeController.atividade.idfase" ng-options="fase.idfase as fase.descricaofase for fase in cadastroAtividadeController.fases track by fase.idfase" ng-required='cadastroAtividadeController.atividade.idtipoatividade==1'>
+                        <select class="form-control" name="faseSelect" ng-model="cadastroAtividadeController.atividade.idfase">
                             <option value="" disabled>- Selecione -</option>
+                            <option value="{{fase.idfase}}" ng-repeat="fase in cadastroAtividadeController.fases">{{fase.descricaofase}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">

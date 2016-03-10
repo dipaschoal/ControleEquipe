@@ -40,7 +40,7 @@ class AtividadeController {
                                             ON atividade.idresponsavel = responsavel.idresponsavel
                                         INNER JOIN celula
                                             ON atividade.idcelula = celula.idcelula
-                                        INNER JOIN fase
+                                        LEFT JOIN fase
                                             ON atividade.idfase = fase.idfase");
             $sth->execute();
 
@@ -69,7 +69,7 @@ class AtividadeController {
         $request = $app->request();
         $body = $request->getBody();
 
-        $atividade = json_decode(utf8_encode($body));
+        $atividade = json_decode($body);
 
         $connection = PDOProvider::getConnection();
 

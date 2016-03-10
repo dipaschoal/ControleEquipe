@@ -132,7 +132,7 @@
 
         function editarAtividade(atividadeToUpdate) {
 
-            vm.atividade = atividadeToUpdate;
+            vm.atividade = angular.copy(atividadeToUpdate);
             vm.isEdicao = true;
         }
 
