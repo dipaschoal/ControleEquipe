@@ -14,8 +14,12 @@ $app->post('/atividades', function() use($atividadeController){
     $atividadeController->addAtividade();
 });
 
-$app->put('/atividades', function() use($atividadeController){
-    $atividadeController->updateAtividade();
+$app->put('/atividades/:idatividade', function($idatividade) use($atividadeController){
+    $atividadeController->updateAtividade($idatividade);
+});
+
+$app->delete('/atividades/:idatividade', function($idatividade) use($atividadeController){
+    $atividadeController->deleteAtividade($idatividade);
 });
 
 ?>

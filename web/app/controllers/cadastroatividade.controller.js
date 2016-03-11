@@ -25,6 +25,7 @@
         vm.addAtividade = addAtividade;
         vm.editarAtividade = editarAtividade;
         vm.updateAtividade = updateAtividade;
+        vm.deleteAtividade = deleteAtividade;
 
         vm.getTiposAtividade = getTiposAtividade;
 
@@ -119,6 +120,22 @@
 
             function isError(response) {
                 console.log("Erro ao editar a atividade.");
+            }
+        }
+
+        function deleteAtividade(idatividade) {
+            console.log(idatividade);
+
+            AtividadeService.deleteAtividade(idatividade).then(isSuccess, isError);
+
+            function isSuccess(response) {
+
+                vm.message = "Deletado com sucesso";
+                vm.getAtividades();
+            }
+
+            function isError(response) {
+                console.log("Erro ao deletar a atividade.");
             }
         }
 

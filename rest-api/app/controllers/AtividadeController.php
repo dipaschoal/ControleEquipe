@@ -123,7 +123,7 @@ class AtividadeController {
         }
     }
 
-    function updateAtividade(){
+    function updateAtividade($idatividade){
 
         $app = \Slim\Slim::getInstance();
         $request = $app->request();
@@ -148,7 +148,7 @@ class AtividadeController {
             $sth->bindParam('nomeatividade',    $atividade->nomeatividade);
             $sth->bindParam('idresponsavel',    $atividade->idresponsavel);
             $sth->bindParam('idcelula',         $atividade->idcelula);
-            $sth->bindParam('idatividade',      $atividade->idatividade);
+            $sth->bindParam('idatividade',      $idatividade);
 
             if($atividade->idtipoatividade == 1){
                 $sth->bindParam('numeroatividade',  $atividade->numeroatividade);
@@ -173,5 +173,35 @@ class AtividadeController {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
     }
+
+    function deleteAtividade($idatividade){
+
+        $app = \Slim\Slim::getInstance();
+
+        $connection = PDOProvider::getConnection();
+
+        try {
+
+            $sth = $connection->prepare("DELETE FROM atividade
+                                            WHERE idatividade = :idatividade");
+
+            $sth->bindParam('idatividade',  $idatividade);
+
+            $sth->execute();
+
+            $app->response->setStatus(200);
+            $app->response()->headers->set('Content-Type', 'application/json');
+
+            $message = "Deletado com SUCESSO";
+            $connection = null;
+
+            echo '{"success":{"text":"'. $message .'"}}';
+
+        } catch(PDOException $e) {
+            $app->response()->setStatus(400);
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
+
 }
 ?>

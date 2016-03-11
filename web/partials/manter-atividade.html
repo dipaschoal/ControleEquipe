@@ -13,7 +13,7 @@
                     <div class="form-group col-md-3">
                         <label class="control-label" for="tipoAtividadeSelect">Tipo de Atividade:</label>
 
-                        <select class="form-control" name="idtipoatividade" ng-model="cadastroAtividadeController.atividade.idtipoatividade">
+                        <select class="form-control" name="idtipoatividade" ng-model="cadastroAtividadeController.atividade.idtipoatividade" ng-change="cadastroAtividadeController.limparTipoAtividade()">
                             <option value="" disabled>- Selecione -</option>
                             <option value="{{tipoAtividade.idtipoatividade}}" ng-repeat="tipoAtividade in cadastroAtividadeController.tipoAtividades">{{tipoAtividade.descricaotipoatividade}}</option>
                         </select>
@@ -140,7 +140,7 @@
                                         </button>
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!atividade.flagAtividadeAlocada" ng-click="cadastroAtividadeController.removerLancamento(atividade)">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!atividade.flagAtividadeAlocada" ng-click="cadastroAtividadeController.deleteAtividade(atividade.idatividade)">
                                             <i class="glyphicon glyphicon-trash"></i>
                                         </button>
                                     </td>
