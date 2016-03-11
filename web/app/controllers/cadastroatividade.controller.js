@@ -2,9 +2,9 @@
     'use strict';
     angular.module('ControleEquipeApp').controller('CadastroAtividadeController', CadastroAtividadeController);
 
-    CadastroAtividadeController.$inject = ['CelulaService', 'FaseService', 'ResponsavelService', 'AtividadeService', 'TipoAtividadeService'];
+    CadastroAtividadeController.$inject = ['CelulaService', 'FaseService', 'ResponsavelService', 'AtividadeService', 'TipoAtividadeService', '$location', '$anchorScroll'];
 
-    function CadastroAtividadeController(CelulaService, FaseService, ResponsavelService, AtividadeService, TipoAtividadeService) {
+    function CadastroAtividadeController(CelulaService, FaseService, ResponsavelService, AtividadeService, TipoAtividadeService, $location, $anchorScroll) {
         var vm = this;
 
         vm.celulas = [];
@@ -16,6 +16,7 @@
         vm.limparTipoAtividade = limparTipoAtividade;
         vm.limparCadastro = limparCadastro;
         vm.sortTable = sortTable;
+        vm.goToElement = goToElement;
 
         vm.getCelulas = getCelulas;
         vm.getFases = getFases;
@@ -173,7 +174,12 @@
 
             vm.atividade = angular.copy(atividadeToUpdate);
             vm.isEdicao = true;
+            vm.goToElement();
         }
 
+        function goToElement() {
+            $location.hash(vm.element);
+            $anchorScroll();
+        }
     }
 }());

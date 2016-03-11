@@ -142,7 +142,7 @@
                                         {{atividade.numeroatividade}}
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAtividadeController.editarAtividade(atividade)" href="#">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAtividadeController.editarAtividade(atividade); cadastroAtividadeController.element = 'legenda'">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </button>
                                     </td>
@@ -158,7 +158,7 @@
                 </div>
             </fieldset>
         </form>
-<!--
+        <!--
         <div class="alert alert alert-info">
             <p>message: {{cadastroAtividadeController.message}}</p>
             <p>idatividade: {{cadastroAtividadeController.atividade.idatividade}}</p>
