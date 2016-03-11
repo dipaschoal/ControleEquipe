@@ -14,4 +14,8 @@ $app->post('/atividades', function() use($atividadeController){
     $atividadeController->addAtividade();
 });
 
+$app->put('/atividades', function() use($atividadeController){
+    $atividadeController->updateAtividade();
+});
+
 ?>

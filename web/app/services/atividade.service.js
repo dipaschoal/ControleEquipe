@@ -8,7 +8,8 @@
 
         var service = {
             getAtividades: getAtividades,
-            addAtividade: addAtividade
+            addAtividade: addAtividade,
+            updateAtividade: updateAtividade
         };
         return service;
 
@@ -18,6 +19,10 @@
 
         function addAtividade(atividade) {
             return $http.post('http://localhost/ControleEquipe/rest-api/atividades', atividade);
+        }
+
+        function updateAtividade(atividade) {
+            return $http.put('http://localhost/ControleEquipe/rest-api/atividades', atividade);
         }
     }
 }());

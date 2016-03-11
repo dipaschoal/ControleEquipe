@@ -24,6 +24,7 @@
         vm.getAtividades = getAtividades;
         vm.addAtividade = addAtividade;
         vm.editarAtividade = editarAtividade;
+        vm.updateAtividade = updateAtividade;
 
         vm.getTiposAtividade = getTiposAtividade;
 
@@ -94,11 +95,30 @@
                 //TODO: carregar a lista de atividades
                 vm.message = "Salvo com sucesso";
                 vm.isEdicao = false;
+                vm.limparCadastro();
                 vm.getAtividades();
             }
 
             function isError(response) {
                 console.log("Erro ao salvar a atividade.");
+            }
+        }
+
+        function updateAtividade() {
+            AtividadeService.updateAtividade(vm.atividade).then(isSuccess, isError);
+
+            console.log(angular.toJson(vm.atividade));
+
+            function isSuccess(response) {
+                //TODO: carregar a lista de atividades
+                vm.message = "Editado com sucesso";
+                vm.isEdicao = false;
+                vm.limparCadastro();
+                vm.getAtividades();
+            }
+
+            function isError(response) {
+                console.log("Erro ao editar a atividade.");
             }
         }
 
@@ -126,7 +146,7 @@
         }
 
         function sortTable() {
-            vm.sortType = 'nomeatividade';
+            vm.sortType = 'descricaotipoatividade';
             vm.sortReverse = true;
         }
 

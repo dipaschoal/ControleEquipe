@@ -55,8 +55,8 @@
                         <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-hide="cadastroAtividadeController.isEdicao" ng-click="cadastroAtividadeController.addAtividade()">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
                         </button>
-                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-show="cadastroAtividadeController.isEdicao" ng-click="cadastroAtividadeController.addAtividade()">
-                            <span class="glyphicon glyphicon-floppy-disk"></span> Editar
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAtividadeForm.$invalid && !cadastroAtividadeForm.$touch" ng-show="cadastroAtividadeController.isEdicao" ng-click="cadastroAtividadeController.updateAtividade()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Confirmar Edi&ccedil;&atilde;o
                         </button>
                     </div>
                     <div class="form-group col-md-6 col-sm-12">
@@ -140,7 +140,7 @@
                                         </button>
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAtividadeController.removerLancamento(atividade)">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!atividade.flagAtividadeAlocada" ng-click="cadastroAtividadeController.removerLancamento(atividade)">
                                             <i class="glyphicon glyphicon-trash"></i>
                                         </button>
                                     </td>
@@ -160,6 +160,7 @@
             <p>idresponsavel: {{ cadastroAtividadeController.atividade.idresponsavel }}</p>
             <p>idfase: {{ cadastroAtividadeController.atividade.idfase }}</p>
             <p>numeroatividade: {{ cadastroAtividadeController.atividade.numeroatividade }}</p>
+            <p>flagAtividadeAlocada: {{ !cadastroAtividadeController.atividade.flagAtividadeAlocada}}</p>
         </div>
     </div>
 </div>

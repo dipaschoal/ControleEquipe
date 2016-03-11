@@ -33,6 +33,7 @@ class AtividadeController {
                                                 ,responsavel.nomeresponsavel
                                                 ,atividade.idcelula
                                                 ,celula.nomecelula
+                                                ,(atividaderecurso.idatividade) IS NOT NULL AS flagAtividadeAlocada
                                         FROM atividade
                                         INNER JOIN tipoatividade
                                             ON atividade.idtipoatividade = tipoatividade.idtipoatividade
@@ -41,7 +42,9 @@ class AtividadeController {
                                         INNER JOIN celula
                                             ON atividade.idcelula = celula.idcelula
                                         LEFT JOIN fase
-                                            ON atividade.idfase = fase.idfase");
+                                            ON atividade.idfase = fase.idfase
+                                        LEFT JOIN atividaderecurso
+                                            ON atividade.idatividade = atividaderecurso.idatividade");
             $sth->execute();
 
             $atividades = $sth->fetchAll(PDO::FETCH_OBJ);
@@ -106,6 +109,57 @@ class AtividadeController {
 
             $sth->execute();
             $atividade->idatividade = $connection->lastInsertId();
+
+            $app->response->setStatus(201);
+            $app->response()->headers->set('Content-Type', 'application/json');
+
+            $connection = null;
+
+            echo json_encode($atividade);
+
+        } catch(PDOException $e) {
+            $app->response()->setStatus(400);
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
+
+    function updateAtividade(){
+
+        $app = \Slim\Slim::getInstance();
+        $request = $app->request();
+        $body = $request->getBody();
+
+        $atividade = json_decode($body);
+
+        $connection = PDOProvider::getConnection();
+
+        try {
+
+            $sth = $connection->prepare("UPDATE atividade SET
+                                             idtipoatividade = :idtipoatividade
+                                            ,nomeatividade = :nomeatividade
+                                            ,numeroatividade = :numeroatividade
+                                            ,idfase = :idfase
+                                            ,idresponsavel = :idresponsavel
+                                            ,idcelula = :idcelula
+                                        WHERE idatividade = :idatividade");
+
+            $sth->bindParam('idtipoatividade',  $atividade->idtipoatividade);
+            $sth->bindParam('nomeatividade',    $atividade->nomeatividade);
+            $sth->bindParam('idresponsavel',    $atividade->idresponsavel);
+            $sth->bindParam('idcelula',         $atividade->idcelula);
+            $sth->bindParam('idatividade',      $atividade->idatividade);
+
+            if($atividade->idtipoatividade == 1){
+                $sth->bindParam('numeroatividade',  $atividade->numeroatividade);
+                $sth->bindParam('idfase',           $atividade->idfase);
+            }else{
+                $null = null;
+                $sth->bindParam('numeroatividade',  $null);
+                $sth->bindParam('idfase',           $null);
+            }
+
+            $sth->execute();
 
             $app->response->setStatus(201);
             $app->response()->headers->set('Content-Type', 'application/json');
