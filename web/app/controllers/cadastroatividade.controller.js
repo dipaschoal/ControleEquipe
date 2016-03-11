@@ -35,6 +35,7 @@
         vm.getAtividades();
         vm.getTiposAtividade();
         vm.sortTable();
+        vm.pesquisarAtividade = "";
         vm.message = "Atividade";
 
         console.log(vm);
@@ -160,6 +161,7 @@
         function limparCadastro() {
             vm.atividade = null;
             vm.isEdicao = false;
+            vm.pesquisarAtividade = "";
         }
 
         function sortTable() {

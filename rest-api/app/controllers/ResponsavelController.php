@@ -22,7 +22,8 @@ class ResponsavelController {
 
         try{
 
-            $sth = $connection->prepare("SELECT * FROM responsavel");
+            $sth = $connection->prepare("SELECT * FROM responsavel
+                                            ORDER BY nomeresponsavel");
             $sth->execute();
 
             $responsaveis = $sth->fetchAll(PDO::FETCH_OBJ);
