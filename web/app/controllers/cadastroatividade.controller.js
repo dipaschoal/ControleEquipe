@@ -174,7 +174,7 @@
 
             vm.atividade = angular.copy(atividadeToUpdate);
             vm.isEdicao = true;
-            vm.goToElement();
+            vm.element = 'legenda';
         }
 
         function goToElement() {

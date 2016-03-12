@@ -1,3 +1,158 @@
-<div class="container">
-    <div class="alert alert-info">{{ cadastroRecursoController.message }}</div>
+<div>
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="display-3">Cadastro de Recursos</h2>
+            <p class="lead">Cadastro dos recursos da equipe.</p>
+        </div>
+    </div>
+    <div class="container">
+        <form name="cadastroRecursoForm">
+            <fieldset class="fieldSet">
+                <legend id="legenda">Informe os dados do recurso.</legend>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="empresaSelect">Empresa:</label>
+                        <select class="form-control" name="idempresa" ng-model="cadastroRecursoController.recurso.idempresa">
+                            <option value="" disabled>- Selecione -</option>
+                            <option value="{{empresa.idempresa}}" ng-repeat="empresa in cadastroRecursoController.empresas">{{empresa.nomeempresa}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="celulaSelect">C&eacute;lula da Recurso:</label>
+                        <select class="form-control" name="celulaSelect" ng-model="cadastroRecursoController.recurso.idcelula">
+                            <option value="" disabled>- Selecione -</option>
+                            <option value="{{celula.idcelula}}" ng-repeat="celula in cadastroRecursoController.celulas">{{celula.nomecelula}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="papelAtuacaoSelect">Papel de Atua&ccedil;&atilde;o:</label>
+                        <select class="form-control" name="papelAtuacaoSelect" ng-model="cadastroRecursoController.recurso.idpapelatuacao">
+                            <option value="" disabled>- Selecione -</option>
+                            <option value="{{papelatuacao.idpapelatuacao}}" ng-repeat="papelatuacao in cadastroRecursoController.papeisAtuacao">{{papelatuacao.descricaopapel}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="nomerecurso">Nome do Recurso:</label>
+                        <input class="form-control" type="text" name="nomerecurso" ng-model="cadastroRecursoController.recurso.nomerecurso" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="emailrecurso">E-Mail:</label>
+                        <input class="form-control" type="email" name="emailrecurso" ng-model="cadastroRecursoController.recurso.emailrecurso" placeholder="teste@teste.com.br" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroRecursoForm.$invalid && !cadastroRecursoForm.$touch" ng-hide="cadastroRecursoController.isEdicao" ng-click="cadastroRecursoController.addAtividade()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+                        </button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroRecursoForm.$invalid && !cadastroRecursoForm.$touch" ng-show="cadastroRecursoController.isEdicao" ng-click="cadastroRecursoController.updateAtividade()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Confirmar Edi&ccedil;&atilde;o
+                        </button>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <button type="button" class="btn btn-secondary" ng-click="cadastroRecursoController.limparCadastro()">
+                            <span class="glyphicon glyphicon-erase"></span> Limpar
+                        </button>
+                    </div>
+                </div>
+                <div class="row" ng-show="cadastroRecursoController.recursos.length > 0">
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Pesquisar" ng-model="cadastroRecursoController.pesquisarRecurso">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 bodycontainer scrollable">
+                        <table class="table table-hover table-scrollable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroRecursoController.sortType = 'nomeempresa' ; cadastroRecursoController.sortReverse = !cadastroRecursoController.sortReverse">Nome Empresa
+                                            <span ng-show="cadastroRecursoController.sortType == 'nomeempresa' && !cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroRecursoController.sortType == 'nomeempresa' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroRecursoController.sortType = 'descricaopapel' ; cadastroRecursoController.sortReverse = !cadastroRecursoController.sortReverse">Papel de Atua&ccedil;&atilde;o
+                                            <span ng-show="cadastroRecursoController.sortType == 'descricaopapel' && !cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroRecursoController.sortType == 'descricaopapel' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroRecursoController.sortType = 'nomecelula' ; cadastroRecursoController.sortReverse = !cadastroRecursoController.sortReverse">
+                                            C&eacute;lula
+                                            <span ng-show="cadastroRecursoController.sortType == 'nomecelula' && !cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroRecursoController.sortType == 'nomecelula' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroRecursoController.sortType = 'nomerecurso' ; cadastroRecursoController.sortReverse = !cadastroRecursoController.sortReverse">
+                                            Nome Recurso
+                                            <span ng-show="cadastroRecursoController.sortType == 'nomerecurso' && !cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroRecursoController.sortType == 'nomerecurso' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroRecursoController.sortType = 'emailrecurso' ; cadastroRecursoController.sortReverse = !cadastroRecursoController.sortReverse">
+                                            E-Mail
+                                            <span ng-show="cadastroRecursoController.sortType == 'emailrecurso' && !cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroRecursoController.sortType == 'emailrecurso' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroRecursoController.sortType = 'numeroatividade' ; cadastroRecursoController.sortReverse = !cadastroRecursoController.sortReverse">
+                                            N&uacute;mero Atividade
+                                            <span ng-show="cadastroRecursoController.sortType == 'numeroatividade' && !cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroRecursoController.sortType == 'numeroatividade' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="recurso in cadastroRecursoController.recursos | orderBy:cadastroRecursoController.sortType:cadastroRecursoController.sortReverse | filter:cadastroRecursoController.pesquisarRecurso track by $index">
+                                    <th class="col-md-2">
+                                        {{recurso.nomeempresa}}
+                                    </th>
+                                    <td class="col-md-2">
+                                        {{recurso.descricaotipoatividade}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{recurso.nomecelula}}
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{recurso.nomerecurso}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{recurso.emailrecurso}}
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroRecursoController.editarRecurso(recurso); cadastroRecursoController.goToElement()">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!recurso.flagAtividadeAlocada" ng-click="cadastroRecursoController.deleteRecurso(recurso.idrecurso)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <div class="alert alert alert-info">
+            <p>message: {{cadastroRecursoController.message}}</p>
+            <p>idempresa: {{cadastroRecursoController.recurso.idempresa}}</p>
+            <p>idcelula: {{cadastroRecursoController.recurso.idcelula}}</p>
+            <p>idpapelatuacao: {{ cadastroRecursoController.recurso.idpapelatuacao }}</p>
+            <p>nomerecurso: {{ cadastroRecursoController.recurso.nomerecurso }}</p>
+            <p>emailrecurso: {{ cadastroRecursoController.recurso.emailrecurso }}</p>
+            <p>flagAtividadeAlocada: {{ !cadastroRecursoController.recurso.flagAtividadeAlocada}}</p>
+        </div>
+
+    </div>
 </div>
