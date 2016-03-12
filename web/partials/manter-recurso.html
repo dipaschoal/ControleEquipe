@@ -42,10 +42,10 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 col-sm-12">
-                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroRecursoForm.$invalid && !cadastroRecursoForm.$touch" ng-hide="cadastroRecursoController.isEdicao" ng-click="cadastroRecursoController.addAtividade()">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroRecursoForm.$invalid && !cadastroRecursoForm.$touch" ng-hide="cadastroRecursoController.isEdicao" ng-click="cadastroRecursoController.addRecurso()">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
                         </button>
-                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroRecursoForm.$invalid && !cadastroRecursoForm.$touch" ng-show="cadastroRecursoController.isEdicao" ng-click="cadastroRecursoController.updateAtividade()">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroRecursoForm.$invalid && !cadastroRecursoForm.$touch" ng-show="cadastroRecursoController.isEdicao" ng-click="cadastroRecursoController.updateRecurso()">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Confirmar Edi&ccedil;&atilde;o
                         </button>
                     </div>
@@ -62,7 +62,6 @@
                             <input type="text" class="form-control" placeholder="Pesquisar" ng-model="cadastroRecursoController.pesquisarRecurso">
                         </div>
                     </div>
-
                     <div class="col-md-12 bodycontainer scrollable">
                         <table class="table table-hover table-scrollable">
                             <thead>
@@ -100,13 +99,6 @@
                                             <span ng-show="cadastroRecursoController.sortType == 'emailrecurso' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                                         </button>
                                     </th>
-                                    <th>
-                                        <button type="button" class="btn-link" ng-click="cadastroRecursoController.sortType = 'numeroatividade' ; cadastroRecursoController.sortReverse = !cadastroRecursoController.sortReverse">
-                                            N&uacute;mero Atividade
-                                            <span ng-show="cadastroRecursoController.sortType == 'numeroatividade' && !cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                                            <span ng-show="cadastroRecursoController.sortType == 'numeroatividade' && cadastroRecursoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                                        </button>
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,7 +107,7 @@
                                         {{recurso.nomeempresa}}
                                     </th>
                                     <td class="col-md-2">
-                                        {{recurso.descricaotipoatividade}}
+                                        {{recurso.descricaopapel}}
                                     </td>
                                     <td class="col-md-1">
                                         {{recurso.nomecelula}}
@@ -123,7 +115,7 @@
                                     <td class="col-md-2">
                                         {{recurso.nomerecurso}}
                                     </td>
-                                    <td class="col-md-1">
+                                    <td class="col-md-3">
                                         {{recurso.emailrecurso}}
                                     </td>
                                     <td class="col-md-1 col-sm-1">
@@ -132,7 +124,7 @@
                                         </button>
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!recurso.flagAtividadeAlocada" ng-click="cadastroRecursoController.deleteRecurso(recurso.idrecurso)">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!recurso.flagRecursoAlocado" ng-click="cadastroRecursoController.deleteRecurso(recurso.idrecurso)">
                                             <i class="glyphicon glyphicon-trash"></i>
                                         </button>
                                     </td>
@@ -143,16 +135,17 @@
                 </div>
             </fieldset>
         </form>
-
-        <div class="alert alert alert-info">
-            <p>message: {{cadastroRecursoController.message}}</p>
-            <p>idempresa: {{cadastroRecursoController.recurso.idempresa}}</p>
-            <p>idcelula: {{cadastroRecursoController.recurso.idcelula}}</p>
-            <p>idpapelatuacao: {{ cadastroRecursoController.recurso.idpapelatuacao }}</p>
-            <p>nomerecurso: {{ cadastroRecursoController.recurso.nomerecurso }}</p>
-            <p>emailrecurso: {{ cadastroRecursoController.recurso.emailrecurso }}</p>
-            <p>flagAtividadeAlocada: {{ !cadastroRecursoController.recurso.flagAtividadeAlocada}}</p>
-        </div>
-
+        <!--
+<div class="alert alert alert-info">
+    <p>message: {{cadastroRecursoController.message}}</p>
+    <p>idrecurso: {{cadastroRecursoController.recurso.idrecurso}}</p>
+    <p>idempresa: {{cadastroRecursoController.recurso.idempresa}}</p>
+    <p>idcelula: {{cadastroRecursoController.recurso.idcelula}}</p>
+    <p>idpapelatuacao: {{ cadastroRecursoController.recurso.idpapelatuacao }}</p>
+    <p>nomerecurso: {{ cadastroRecursoController.recurso.nomerecurso }}</p>
+    <p>emailrecurso: {{ cadastroRecursoController.recurso.emailrecurso }}</p>
+    <p>flagRecursoAlocado: {{ !cadastroRecursoController.recurso.flagRecursoAlocado}}</p>
+</div>
+-->
     </div>
 </div>
