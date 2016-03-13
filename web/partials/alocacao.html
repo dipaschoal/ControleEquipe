@@ -51,10 +51,10 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 col-sm-12">
-                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAlocacaoForm.$invalid && !cadastroAlocacaoForm.$touch" ng-hide="cadastroAlocacaoController.isEdicao" ng-click="cadastroAlocacaoController.addRecurso()">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAlocacaoForm.$invalid && !cadastroAlocacaoForm.$touch" ng-hide="cadastroAlocacaoController.isEdicao" ng-click="cadastroAlocacaoController.addAtividadeRecurso()">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
                         </button>
-                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAlocacaoForm.$invalid && !cadastroAlocacaoForm.$touch" ng-show="cadastroAlocacaoController.isEdicao" ng-click="cadastroAlocacaoController.updateRecurso()">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAlocacaoForm.$invalid && !cadastroAlocacaoForm.$touch" ng-show="cadastroAlocacaoController.isEdicao" ng-click="cadastroAlocacaoController.updateAtividadeRecurso()">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Confirmar Edi&ccedil;&atilde;o
                         </button>
                     </div>
@@ -68,7 +68,7 @@
                     <div class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                            <input type="text" class="form-control" placeholder="Filtrar resultados" ng-model="cadastroAlocacaoController.pesquisarRecurso">
+                            <input type="text" class="form-control" placeholder="Filtrar resultados" ng-model="cadastroAlocacaoController.pesquisarAtividadeRecurso">
                         </div>
                     </div>
                     <div class="col-md-12 bodycontainer scrollable">
@@ -76,64 +76,74 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomeempresa' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">Nome Empresa
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomeempresa' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomeempresa' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                                        </button>
-                                    </th>
-                                    <th>
-                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'descricaopapel' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">Papel de Atua&ccedil;&atilde;o
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaopapel' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaopapel' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                                        </button>
-                                    </th>
-                                    <th>
-                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomecelula' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
-                                            C&eacute;lula
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomecelula' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomecelula' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                                        </button>
-                                    </th>
-                                    <th>
-                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomerecurso' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
-                                            Nome Recurso
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomerecurso' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">Recurso
                                             <span ng-show="cadastroAlocacaoController.sortType == 'nomerecurso' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
                                             <span ng-show="cadastroAlocacaoController.sortType == 'nomerecurso' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                                         </button>
                                     </th>
                                     <th>
-                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'emailrecurso' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
-                                            E-Mail
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'emailrecurso' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                                            <span ng-show="cadastroAlocacaoController.sortType == 'emailrecurso' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomeatividade' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">Atividade
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomeatividade' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomeatividade' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'descricaopapel' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            Papel Atua&ccedil;&atilde;o
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaopapel' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaopapel' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'datainicioalocacao' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            Data In&iacute;cio
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'datainicioalocacao' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'datainicioalocacao' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'datafimalocacao' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            Data Fim
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'datafimalocacao' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'datafimalocacao' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'flagpontofocal' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            Ponto Focal
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'flagpontofocal' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'flagpontofocal' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                                         </button>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="recurso in cadastroAlocacaoController.recursos | orderBy:cadastroAlocacaoController.sortType:cadastroAlocacaoController.sortReverse | filter:cadastroAlocacaoController.pesquisarRecurso track by $index">
+                                <tr ng-repeat="alocacao in cadastroAlocacaoController.atividadesRecurso | orderBy:cadastroAlocacaoController.sortType:cadastroAlocacaoController.sortReverse | filter:cadastroAlocacaoController.pesquisarAlocacao track by $index">
                                     <th class="col-md-2">
-                                        {{alocacao.nomeempresa}}
+                                        {{alocacao.nomerecurso}}
                                     </th>
                                     <td class="col-md-2">
-                                        {{alocacao.descricaopapel}}
+                                        {{alocacao.nomeatividade}}
                                     </td>
                                     <td class="col-md-1">
-                                        {{alocacao.nomecelula}}
+                                        {{alocacao.descricaopapel}}
                                     </td>
                                     <td class="col-md-2">
-                                        {{alocacao.nomerecurso}}
+                                        {{alocacao.datainicioalocacao}}
                                     </td>
                                     <td class="col-md-3">
-                                        {{alocacao.emailrecurso}}
+                                        {{alocacao.datafimalocacao}}
+                                    </td>
+                                    <td class="col-md-3">
+                                        {{alocacao.flagpontofocal}}
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAlocacaoController.editarRecurso(recurso)">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAlocacaoController.editarAtividadeRecurso(recurso)">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </button>
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!alocacao.flagRecursoAlocado" ng-click="cadastroAlocacaoController.deleteRecurso(alocacao.idrecurso)">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!alocacao.flagRecursoAlocado" ng-click="cadastroAlocacaoController.deleteAtividadeRecurso(alocacao.idrecurso)">
                                             <i class="glyphicon glyphicon-trash"></i>
                                         </button>
                                     </td>
