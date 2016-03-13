@@ -36,7 +36,8 @@
         vm.getAtividades();
         vm.getTiposAtividade();
         vm.sortTable();
-        vm.pesquisarAtividade = "";
+
+        vm.element = 'legenda';
         vm.message = "Atividade";
 
         console.log(vm);
@@ -174,7 +175,7 @@
 
             vm.atividade = angular.copy(atividadeToUpdate);
             vm.isEdicao = true;
-            vm.element = 'legenda';
+//            vm.goToElement();
         }
 
         function goToElement() {

@@ -38,6 +38,7 @@
         vm.sortTable();
 
         vm.message = "Recurso";
+        vm.element = 'legenda';
 
         console.log(vm);
 
@@ -146,7 +147,7 @@
 
             vm.recurso = angular.copy(recursoToUpdate);
             vm.isEdicao = true;
-            vm.element = 'legenda';
+//            vm.goToElement();
         }
 
         function limparCadastro() {

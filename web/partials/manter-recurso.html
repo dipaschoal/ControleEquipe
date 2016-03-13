@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label" for="empresaSelect">Empresa:</label>
-                        <select class="form-control" name="idempresa" ng-model="cadastroRecursoController.recurso.idempresa">
+                        <select class="form-control" name="empresaSelect" ng-model="cadastroRecursoController.recurso.idempresa">
                             <option value="" disabled>- Selecione -</option>
                             <option value="{{empresa.idempresa}}" ng-repeat="empresa in cadastroRecursoController.empresas">{{empresa.nomeempresa}}</option>
                         </select>
@@ -59,7 +59,7 @@
                     <div class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                            <input type="text" class="form-control" placeholder="Pesquisar" ng-model="cadastroRecursoController.pesquisarRecurso">
+                            <input type="text" class="form-control" placeholder="Filtrar resultados" ng-model="cadastroRecursoController.pesquisarRecurso">
                         </div>
                     </div>
                     <div class="col-md-12 bodycontainer scrollable">
@@ -119,7 +119,7 @@
                                         {{recurso.emailrecurso}}
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroRecursoController.editarRecurso(recurso); cadastroRecursoController.goToElement()">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroRecursoController.editarRecurso(recurso)">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </button>
                                     </td>
@@ -135,7 +135,7 @@
                 </div>
             </fieldset>
         </form>
-        <!--
+
 <div class="alert alert alert-info">
     <p>message: {{cadastroRecursoController.message}}</p>
     <p>idrecurso: {{cadastroRecursoController.recurso.idrecurso}}</p>
@@ -146,6 +146,6 @@
     <p>emailrecurso: {{ cadastroRecursoController.recurso.emailrecurso }}</p>
     <p>flagRecursoAlocado: {{ !cadastroRecursoController.recurso.flagRecursoAlocado}}</p>
 </div>
--->
+
     </div>
 </div>
