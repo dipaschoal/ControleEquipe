@@ -4,6 +4,9 @@
 
     EmpresaService.$inject = ['$http'];
 
+    //    var host = "localhost";
+    var host = "172.18.28.73";
+
     function EmpresaService($http) {
 
         var service = {
@@ -12,7 +15,7 @@
         return service;
 
         function getEmpresas() {
-            return $http.get('http://localhost/ControleEquipe/rest-api/empresas');
+            return $http.get('http://' + host + '/ControleEquipe/rest-api/empresas');
         }
     }
 

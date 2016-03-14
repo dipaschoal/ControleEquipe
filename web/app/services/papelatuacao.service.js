@@ -4,6 +4,9 @@
 
     PapelAtuacaoService.$inject = ['$http'];
 
+    //    var host = "localhost";
+    var host = "172.18.28.73";
+
     function PapelAtuacaoService($http) {
 
         var service = {
@@ -12,7 +15,7 @@
         return service;
 
         function getPapeisAtuacao() {
-            return $http.get('http://localhost/ControleEquipe/rest-api/papeisAtuacao');
+            return $http.get('http://' + host + '/ControleEquipe/rest-api/papeisAtuacao');
         }
     }
 

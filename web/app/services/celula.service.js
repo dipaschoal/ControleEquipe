@@ -4,6 +4,10 @@
 
     CelulaService.$inject = ['$http'];
 
+    //    var host = "localhost";
+    var host = "172.18.28.73";
+
+
     function CelulaService($http) {
 
         var service = {
@@ -12,7 +16,7 @@
         return service;
 
         function getCelulas() {
-            return $http.get('http://localhost/ControleEquipe/rest-api/celulas');
+            return $http.get('http://' + host + '/ControleEquipe/rest-api/celulas');
         }
     }
 

@@ -4,6 +4,9 @@
 
     LancamentoService.$inject = ['$http'];
 
+    //    var host = "localhost";
+    var host = "172.18.28.73";
+
     function LancamentoService($http) {
 
         var service = {
@@ -12,7 +15,7 @@
         return service;
 
         function getLancamentos() {
-            return $http.get('http://localhost/ControleEquipe/rest-api/lancamentos');
+            return $http.get('http://' + host + '/ControleEquipe/rest-api/lancamentos');
         }
     }
 

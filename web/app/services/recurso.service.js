@@ -4,6 +4,9 @@
 
     RecursoService.$inject = ['$http'];
 
+    //    var host = "localhost";
+    var host = "172.18.28.73";
+
     function RecursoService($http) {
 
         var service = {
@@ -15,19 +18,19 @@
         return service;
 
         function getRecursos() {
-            return $http.get('http://localhost/ControleEquipe/rest-api/recursos');
+            return $http.get('http://' + host + '/ControleEquipe/rest-api/recursos');
         }
 
         function addRecurso(recurso) {
-            return $http.post('http://localhost/ControleEquipe/rest-api/recursos', recurso);
+            return $http.post('http://' + host + '/ControleEquipe/rest-api/recursos', recurso);
         }
 
         function updateRecurso(recurso) {
-            return $http.put('http://localhost/ControleEquipe/rest-api/recursos/' + recurso.idrecurso, recurso);
+            return $http.put('http://' + host + '/ControleEquipe/rest-api/recursos/' + recurso.idrecurso, recurso);
         }
 
         function deleteRecurso(idrecurso) {
-            return $http.delete('http://localhost/ControleEquipe/rest-api/recursos/' + idrecurso);
+            return $http.delete('http://' + host + '/ControleEquipe/rest-api/recursos/' + idrecurso);
         }
     }
 
