@@ -175,7 +175,7 @@
 
             vm.alocacao = angular.copy(alocacaoToUpdate);
             vm.isEdicao = true;
-//            vm.goToElement();
+            //            vm.goToElement();
         }
 
         function goToElement() {
