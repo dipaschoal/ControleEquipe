@@ -7,7 +7,7 @@ require_once "app/providers/PDOProvider.php";
     use \PDO;
     use \PDOException;
 
-class AtividadeRecursoController {
+class TipoAlocacaoController {
 
 //	private $app;
 
@@ -15,22 +15,22 @@ class AtividadeRecursoController {
 //        $this->app = \Slim\Slim::getInstance();
     }
 
-    function getAtividadesRecurso() {
+    function getTiposAlocacao() {
 
         $app = \Slim\Slim::getInstance();
         $connection = PDOProvider::getConnection();
 
         try{
 
-            $sth = $connection->prepare("SELECT * FROM atividaderecurso");
+            $sth = $connection->prepare("SELECT * FROM tipoalocacao");
             $sth->execute();
 
-            $atividadesRecurso = $sth->fetchAll(PDO::FETCH_OBJ);
+            $tiposAlocacao = $sth->fetchAll(PDO::FETCH_OBJ);
 
-            if($atividadesRecurso) {
+            if($tiposAlocacao) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($atividadesRecurso );
+                echo json_encode($tiposAlocacao);
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);

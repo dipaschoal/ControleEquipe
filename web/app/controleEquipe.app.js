@@ -9,20 +9,22 @@
 
         $routeProvider
             .when('/alocacao', {
-                templateUrl: 'partials/alocacao.html',
-                controller: 'CadastroAlocacaoController as cadastroAlocacaoController'
+                templateUrl: 'partials/alocar-recurso.html',
+                controller: 'CadastroAlocacaoRecursoController as cadastroAlocacaoRecursoController'
             })
             .when('/lancamento', {
                 templateUrl: 'partials/lancamento.html',
                 controller: 'CadastroLancamentoController as cadastroLancamentoController'
             })
-            .when('/manter/atividade', {
-                templateUrl: 'partials/manter-atividade.html',
-                controller: 'CadastroAtividadeController as cadastroAtividadeController'
+            .when('/manter/alocacao', {
+                templateUrl: 'partials/manter-alocacao.html',
+                controller: 'CadastroAlocacaoController as cadastroAlocacaoController'
             })
             .when('/manter/recurso', {
                 templateUrl: 'partials/manter-recurso.html',
                 controller: 'CadastroRecursoController as cadastroRecursoController'
             });
     };
+
+
 }());

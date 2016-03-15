@@ -31,7 +31,7 @@ class RecursoController {
                                                 ,empresa.nomeempresa
                                                 ,recurso.idpapelatuacao
                                                 ,papelatuacao.descricaopapel
-                                                ,(atividaderecurso.idrecurso) IS NOT NULL AS flagRecursoAlocado
+                                                ,(alocacaorecurso.idrecurso) IS NOT NULL AS flagRecursoAlocado
                                             FROM recurso
                                             INNER JOIN celula
                                                 ON recurso.idcelula = celula.idcelula
@@ -39,8 +39,8 @@ class RecursoController {
                                                 ON recurso.idempresa = empresa.idempresa
                                             INNER JOIN papelatuacao
                                                 ON recurso.idpapelatuacao = papelatuacao.idpapelatuacao
-                                            LEFT JOIN atividaderecurso
-                                                ON recurso.idrecurso = atividaderecurso.idrecurso");
+                                            LEFT JOIN alocacaorecurso
+                                                ON recurso.idrecurso = alocacaorecurso.idrecurso");
 
             $sth->execute();
 

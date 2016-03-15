@@ -1,0 +1,174 @@
+<div>
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="display-3">Cadastro de Aloca&ccedil;&otilde;es</h2>
+            <p class="lead">Cadastro de aloca&ccedil;&otilde;es, sendo administrativa ou em projetos executados pelo CDS Sinistro Auto.</p>
+        </div>
+    </div>
+    <div class="container">
+        <form name="cadastroAlocacaoForm">
+            <fieldset class="fieldSet">
+                <legend id="legenda">Informe os dados da aloca&ccedil;&atilde;o.</legend>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="tipoAlocacaoSelect">Tipo de Aloca&ccedil;&atilde;o:</label>
+                        <select class="form-control" name="tipoAlocacaoSelect" ng-model="cadastroAlocacaoController.alocacao.idtipoalocacao" ng-change="cadastroAlocacaoController.limparTipoAlocacao()">
+                            <option value="" disabled>- Selecione -</option>
+                            <option value="{{tipoAlocacao.idtipoalocacao}}" ng-repeat="tipoAlocacao in cadastroAlocacaoController.tipoAlocacoes">{{tipoAlocacao.descricaotipoalocacao}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="nomealocacao">Nome da Aloca&ccedil;&atilde;o:</label>
+                        <input class="form-control" type="text" name="nomealocacao" ng-model="cadastroAlocacaoController.alocacao.nomealocacao" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="celulaSelect">C&eacute;lula da Aloca&ccedil;&atilde;o:</label>
+                        <select class="form-control" name="celulaSelect" ng-model="cadastroAlocacaoController.alocacao.idcelula">
+                            <option value="" disabled>- Selecione -</option>
+                            <option value="{{celula.idcelula}}" ng-repeat="celula in cadastroAlocacaoController.celulas">{{celula.nomecelula}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="responsaveloSelect">Respons&aacute;vel pela Aloca&ccedil;&atilde;o:</label>
+                        <select class="form-control" name="responsavelSelect" ng-model="cadastroAlocacaoController.alocacao.idresponsavel">
+                            <option value="" disabled>- Selecione -</option>
+                            <option value="{{responsavel.idresponsavel}}" ng-repeat="responsavel in cadastroAlocacaoController.responsaveis">{{responsavel.nomeresponsavel}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" ng-show="cadastroAlocacaoController.alocacao.idtipoalocacao==1">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="faseSelect">Fase:</label>
+                        <select class="form-control" name="faseSelect" ng-model="cadastroAlocacaoController.alocacao.idfase">
+                            <option value="" disabled>- Selecione -</option>
+                            <option value="{{fase.idfase}}" ng-repeat="fase in cadastroAlocacaoController.fases">{{fase.descricaofase}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="numeroalocacao">N&uacute;mero do Aloca&ccedil;&atilde;o:</label>
+                        <input class="form-control" type="text" name="numeroprojeto" ng-model="cadastroAlocacaoController.alocacao.numeroalocacao">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3 col-sm-6">
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAlocacaoForm.$invalid && !cadastroAlocacaoForm.$touch" ng-hide="cadastroAlocacaoController.isEdicao" ng-click="cadastroAlocacaoController.addAlocacao()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+                        </button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="cadastroAlocacaoForm.$invalid && !cadastroAlocacaoForm.$touch" ng-show="cadastroAlocacaoController.isEdicao" ng-click="cadastroAlocacaoController.updateAlocacao()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Confirmar Edi&ccedil;&atilde;o
+                        </button>
+                    </div>
+                    <div class="form-group col-md-3 col-sm-6">
+                        <button type="button" class="btn btn-secondary" ng-click="cadastroAlocacaoController.limparCadastro()">
+                            <span class="glyphicon glyphicon-erase"></span> Limpar
+                        </button>
+                    </div>
+                </div>
+                <div class="row" ng-show="cadastroAlocacaoController.alocacoes.length > 0">
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Filtrar resultados" ng-model="cadastroAlocacaoController.pesquisarAlocacao">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 bodycontainer scrollable">
+                        <table class="table table-hover table-scrollable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomealocacao' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">Nome Aloca&ccedil;&atilde;o
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomealocacao' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomealocacao' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'descricaotipoalocacao' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">Tipo Aloca&ccedil;&atilde;o
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaotipoalocacao' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaotipoalocacao' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomecelula' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            C&eacute;lula
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomecelula' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomecelula' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'nomeresponsavel' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            Respons&aacute;vel
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomeresponsavel' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'nomeresponsavel' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'descricaofase' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            Fase
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaofase' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'descricaofase' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroAlocacaoController.sortType = 'numeroalocacao' ; cadastroAlocacaoController.sortReverse = !cadastroAlocacaoController.sortReverse">
+                                            N&uacute;mero Aloca&ccedil;&atilde;o
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'numeroalocacao' && !cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroAlocacaoController.sortType == 'numeroalocacao' && cadastroAlocacaoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="alocacao in cadastroAlocacaoController.alocacoes | orderBy:cadastroAlocacaoController.sortType:cadastroAlocacaoController.sortReverse | filter:cadastroAlocacaoController.pesquisarAlocacao track by $index">
+                                    <th class="col-md-2">
+                                        {{alocacao.nomealocacao}}
+                                    </th>
+                                    <td class="col-md-2">
+                                        {{alocacao.descricaotipoalocacao}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{alocacao.nomecelula}}
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{alocacao.nomeresponsavel}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{alocacao.descricaofase}}
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{alocacao.numeroalocacao}}
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAlocacaoController.editarAlocacao(alocacao)">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!alocacao.flagAlocacaoAlocada" ng-click="cadastroAlocacaoController.deleteAlocacao(alocacao.idalocacao)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--
+        <div class="alert alert alert-info">
+            <p>message: {{cadastroAlocacaoController.message}}</p>
+            <p>idalocacao: {{cadastroAlocacaoController.alocacao.idalocacao}}</p>
+            <p>idtipoalocacao: {{cadastroAlocacaoController.alocacao.idtipoalocacao}}</p>
+            <p>nomealocacao: {{ cadastroAlocacaoController.alocacao.nomealocacao }}</p>
+            <p>idcelula: {{ cadastroAlocacaoController.alocacao.idcelula }}</p>
+            <p>idresponsavel: {{ cadastroAlocacaoController.alocacao.idresponsavel }}</p>
+            <p>idfase: {{ cadastroAlocacaoController.alocacao.idfase }}</p>
+            <p>numeroalocacao: {{ cadastroAlocacaoController.alocacao.numeroalocacao }}</p>
+            <p>flagAlocacaoAlocada: {{ !cadastroAlocacaoController.alocacao.flagAlocacaoAlocada}}</p>
+        </div>
+-->
+    </div>
+</div>

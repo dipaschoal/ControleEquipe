@@ -1,42 +1,30 @@
 (function () {
     'use strict';
-    angular.module('ControleEquipeApp').controller('CadastroLancamentoController', CadastroLancamentoController);
+    angular.module('ControleEquipeApp').controller('CadastroAlocacaoRecursoController', CadastroAlocacaoRecursoController);
 
-    CadastroLancamentoController.$inject = ['FaseService', 'LancamentoService', 'AlocacaoService', 'RecursoService', 'AlocacaoRecursoService'];
+    CadastroAlocacaoRecursoController.$inject = ['AlocacaoService', 'RecursoService', 'PapelAtuacaoService', 'AlocacaoRecursoService'];
 
-    function CadastroLancamentoController(FaseService, LancamentoService, AlocacaoService, RecursoService, AlocacaoRecursoService) {
+    function CadastroAlocacaoRecursoController(AlocacaoService, RecursoService, PapelAtuacaoService, AlocacaoRecursoService) {
         var vm = this;
 
-        vm.fases = [];
         vm.alocacoes = [];
         vm.recursos = [];
-        vm.alocacaoRecurso = [];
+        vm.papeisAtuacao = [];
+        vm.alocacoesRecurso = [];
 
-        vm.getFases = getFases
         vm.getAlocacoes = getAlocacoes;
         vm.getRecursos = getRecursos;
+        vm.getPapeisAtuacao = getPapeisAtuacao;
         vm.getAlocacoesRecurso = getAlocacoesRecurso;
 
-        vm.getFases();
         vm.getAlocacoes();
         vm.getRecursos();
+        vm.getPapeisAtuacao();
         vm.getAlocacoesRecurso();
 
-        vm.message = "Lancamento";
+        vm.message = "Alocacao";
 
         console.log(vm);
-
-        function getFases() {
-            FaseService.getFases().then(isSuccess, isError);
-
-            function isSuccess(response) {
-                vm.fases = response.data;
-            }
-
-            function isError(response) {
-                console.log("Erro ao carregar as fases.");
-            }
-        }
 
         function getAlocacoes() {
             AlocacaoService.getAlocacoes().then(isSuccess, isError);
@@ -59,6 +47,18 @@
 
             function isError(response) {
                 console.log("Erro ao carregar os recursos.");
+            }
+        }
+
+        function getPapeisAtuacao() {
+            PapelAtuacaoService.getPapeisAtuacao().then(isSuccess, isError);
+
+            function isSuccess(response) {
+                vm.papeisAtuacao = response.data;
+            }
+
+            function isError(response) {
+                console.log("Erro ao carregar os papeis de atuacao.");
             }
         }
 
