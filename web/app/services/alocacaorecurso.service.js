@@ -10,12 +10,27 @@
     function AlocacaoRecursoService($http) {
 
         var service = {
-            getAlocacoesRecurso: getAlocacoesRecurso
+            getAlocacoesRecurso: getAlocacoesRecurso,
+            addAlocacaoRecurso: addAlocacaoRecurso,
+            updateAlocacaoRecurso: updateAlocacaoRecurso,
+            deleteAlocacaoRecurso: deleteAlocacaoRecurso
         };
         return service;
 
         function getAlocacoesRecurso() {
             return $http.get('http://' + host + '/ControleEquipe/rest-api/alocacoesRecurso');
+        }
+
+        function addAlocacaoRecurso(alocacaorecurso) {
+            return $http.post('http://' + host + '/ControleEquipe/rest-api/alocacoesRecurso', alocacaorecurso);
+        }
+
+        function updateAlocacaoRecurso(alocacaorecurso) {
+            return $http.put('http://' + host + '/ControleEquipe/rest-api/alocacoesRecurso/' + alocacaorecurso.idalocacaorecurso, alocacaorecurso);
+        }
+
+        function deleteAlocacaoRecurso(idalocacaorecurso) {
+            return $http.delete('http://' + host + '/ControleEquipe/rest-api/alocacoesRecurso/' + idalocacaorecurso);
         }
     }
 
