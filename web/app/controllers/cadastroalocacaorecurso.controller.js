@@ -33,8 +33,8 @@
         vm.message = "Alocacao";
 
         vm.alocacaorecurso = {
-            flagpontofocal: false,
-            flagalocacaorecursoativa: true
+            flagpontofocal: 0,
+            flagalocacaorecursoativa: 1
         };
 
         console.log(vm);
