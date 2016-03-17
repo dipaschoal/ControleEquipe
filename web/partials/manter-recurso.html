@@ -12,23 +12,20 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label" for="empresaSelect">Empresa:</label>
-                        <select class="form-control" name="empresaSelect" ng-model="cadastroRecursoController.recurso.idempresa">
+                        <select class="form-control" name="empresaSelect" ng-model="cadastroRecursoController.recurso.idempresa" ng-options="empresa.idempresa as empresa.nomeempresa for empresa in cadastroRecursoController.empresas">
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{empresa.idempresa}}" ng-repeat="empresa in cadastroRecursoController.empresas">{{empresa.nomeempresa}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label" for="celulaSelect">C&eacute;lula da Recurso:</label>
-                        <select class="form-control" name="celulaSelect" ng-model="cadastroRecursoController.recurso.idcelula">
+                        <select class="form-control" name="celulaSelect" ng-model="cadastroRecursoController.recurso.idcelula" ng-options="celula.idcelula as celula.nomecelula for celula in cadastroRecursoController.celulas">
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{celula.idcelula}}" ng-repeat="celula in cadastroRecursoController.celulas">{{celula.nomecelula}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label" for="papelAtuacaoSelect">Papel de Atua&ccedil;&atilde;o:</label>
-                        <select class="form-control" name="papelAtuacaoSelect" ng-model="cadastroRecursoController.recurso.idpapelatuacao">
+                        <select class="form-control" name="papelAtuacaoSelect" ng-model="cadastroRecursoController.recurso.idpapelatuacao" ng-options="papelatuacao.idpapelatuacao as papelatuacao.descricaopapel for papelatuacao in cadastroRecursoController.papeisAtuacao">
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{papelatuacao.idpapelatuacao}}" ng-repeat="papelatuacao in cadastroRecursoController.papeisAtuacao">{{papelatuacao.descricaopapel}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">

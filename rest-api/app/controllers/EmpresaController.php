@@ -31,7 +31,7 @@ class EmpresaController {
             if($empresas) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($empresas);
+                $app->response->setBody(json_encode($empresas,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);

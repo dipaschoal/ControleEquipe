@@ -12,9 +12,8 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label class="control-label" for="tipoAlocacaoSelect">Tipo de Aloca&ccedil;&atilde;o:</label>
-                        <select class="form-control" name="tipoAlocacaoSelect" ng-model="cadastroAlocacaoController.alocacao.idtipoalocacao" ng-change="cadastroAlocacaoController.limparTipoAlocacao()">
+                        <select class="form-control" name="tipoAlocacaoSelect" ng-model="cadastroAlocacaoController.alocacao.idtipoalocacao" ng-change="cadastroAlocacaoController.limparTipoAlocacao()" ng-options="tipoAlocacao.idtipoalocacao as tipoAlocacao.descricaotipoalocacao for tipoAlocacao in cadastroAlocacaoController.tipoAlocacoes">
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{tipoAlocacao.idtipoalocacao}}" ng-repeat="tipoAlocacao in cadastroAlocacaoController.tipoAlocacoes">{{tipoAlocacao.descricaotipoalocacao}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
@@ -23,25 +22,22 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label class="control-label" for="celulaSelect">C&eacute;lula da Aloca&ccedil;&atilde;o:</label>
-                        <select class="form-control" name="celulaSelect" ng-model="cadastroAlocacaoController.alocacao.idcelula">
+                        <select class="form-control" name="celulaSelect" ng-model="cadastroAlocacaoController.alocacao.idcelula" ng-options="celula.idcelula as celula.nomecelula for celula in cadastroAlocacaoController.celulas">
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{celula.idcelula}}" ng-repeat="celula in cadastroAlocacaoController.celulas">{{celula.nomecelula}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label class="control-label" for="responsaveloSelect">Respons&aacute;vel pela Aloca&ccedil;&atilde;o:</label>
-                        <select class="form-control" name="responsavelSelect" ng-model="cadastroAlocacaoController.alocacao.idresponsavel">
+                        <select class="form-control" name="responsavelSelect" ng-model="cadastroAlocacaoController.alocacao.idresponsavel" ng-options="responsavel.idresponsavel as responsavel.nomeresponsavel for responsavel in cadastroAlocacaoController.responsaveis">
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{responsavel.idresponsavel}}" ng-repeat="responsavel in cadastroAlocacaoController.responsaveis">{{responsavel.nomeresponsavel}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="row" ng-show="cadastroAlocacaoController.alocacao.idtipoalocacao==1">
                     <div class="form-group col-md-6">
                         <label class="control-label" for="faseSelect">Fase:</label>
-                        <select class="form-control" name="faseSelect" ng-model="cadastroAlocacaoController.alocacao.idfase">
+                        <select class="form-control" name="faseSelect" ng-model="cadastroAlocacaoController.alocacao.idfase" ng-options="fase.idfase as fase.descricaofase for fase in cadastroAlocacaoController.fases">
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{fase.idfase}}" ng-repeat="fase in cadastroAlocacaoController.fases">{{fase.descricaofase}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">

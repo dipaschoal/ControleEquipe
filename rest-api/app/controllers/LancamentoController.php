@@ -30,7 +30,7 @@ class LancamentoController {
             if($lancamentos) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($lancamentos);
+                $app->response->setBody(json_encode($lancamentos,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);

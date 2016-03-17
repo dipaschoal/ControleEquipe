@@ -43,7 +43,7 @@
             AlocacaoService.getAlocacoes().then(isSuccess, isError);
 
             function isSuccess(response) {
-                vm.alocacoes = response.data;
+                vm.alocacoes = angular.fromJson(response.data);
             }
 
             function isError(response) {
@@ -55,7 +55,7 @@
             RecursoService.getRecursos().then(isSuccess, isError);
 
             function isSuccess(response) {
-                vm.recursos = response.data;
+                vm.recursos = angular.fromJson(response.data);
             }
 
             function isError(response) {
@@ -67,7 +67,7 @@
             PapelAtuacaoService.getPapeisAtuacao().then(isSuccess, isError);
 
             function isSuccess(response) {
-                vm.papeisAtuacao = response.data;
+                vm.papeisAtuacao = angular.fromJson(response.data);
             }
 
             function isError(response) {
@@ -79,7 +79,7 @@
             AlocacaoRecursoService.getAlocacoesRecurso().then(isSuccess, isError);
 
             function isSuccess(response) {
-                vm.alocacoesRecurso = response.data;
+                vm.alocacoesRecurso = angular.fromJson(response.data);
             }
 
             function isError(response) {
@@ -158,14 +158,13 @@
 
         function editarAlocacaoRecurso(alocacaoRecursoToUpdate) {
 
+            console.log(alocacaoRecursoToUpdate);
             console.log(angular.toJson(alocacaoRecursoToUpdate));
 
             vm.alocacaorecurso = angular.copy(alocacaoRecursoToUpdate);
             vm.alocacaorecurso.datainicioalocacao = new Date(alocacaoRecursoToUpdate.datainicioalocacao);
             vm.alocacaorecurso.datafimalocacao = new Date(alocacaoRecursoToUpdate.datafimalocacao);
-            vm.alocacaorecurso.flagpontofocal = Boolean(alocacaoRecursoToUpdate.flagpontofocal.valueOf);
-            vm.alocacaorecurso.flagalocacaorecursoativa = Boolean(alocacaoRecursoToUpdate.flagalocacaorecursoativa.valueOf);
-            vm.alocacaorecurso.quantidadehoras = parseFloat(alocacaoRecursoToUpdate.quantidadehoras);
+
             vm.isEdicao = true;
             //            vm.goToElement();
         }

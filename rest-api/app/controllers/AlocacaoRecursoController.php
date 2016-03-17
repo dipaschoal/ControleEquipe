@@ -51,7 +51,7 @@ class AlocacaoRecursoController {
             if($alocacoesRecurso) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($alocacoesRecurso );
+                $app->response->setBody(json_encode($alocacoesRecurso, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);
@@ -111,7 +111,7 @@ class AlocacaoRecursoController {
 
             $connection = null;
 
-            echo json_encode($alocacaoRecurso);
+            $app->response->setBody(json_encode($alocacaoRecurso,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
 
         } catch(PDOException $e) {
             $app->response()->setStatus(400);
@@ -159,7 +159,7 @@ class AlocacaoRecursoController {
 
             $connection = null;
 
-            echo json_encode($alocacaoRecurso);
+            $app->response->setBody(json_encode($alocacaoRecurso,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
 
         } catch(PDOException $e) {
             $app->response()->setStatus(400);

@@ -40,7 +40,8 @@ class RecursoController {
                                             INNER JOIN papelatuacao
                                                 ON recurso.idpapelatuacao = papelatuacao.idpapelatuacao
                                             LEFT JOIN alocacaorecurso
-                                                ON recurso.idrecurso = alocacaorecurso.idrecurso");
+                                                ON recurso.idrecurso = alocacaorecurso.idrecurso
+                                            GROUP BY recurso.idrecurso");
 
             $sth->execute();
 
@@ -49,7 +50,8 @@ class RecursoController {
             if($recursos) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($recursos);
+                $app->response->setBody(json_encode($recursos,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
+
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);
@@ -102,7 +104,7 @@ class RecursoController {
 
             $connection = null;
 
-            echo json_encode($recurso);
+            $app->response->setBody(json_encode($recurso,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
 
         } catch(PDOException $e) {
             $app->response()->setStatus(400);
@@ -145,7 +147,8 @@ class RecursoController {
 
             $connection = null;
 
-            echo json_encode($recurso);
+            $app->response->setBody(json_encode($recurso,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
+
 
         } catch(PDOException $e) {
             $app->response()->setStatus(400);

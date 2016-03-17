@@ -30,7 +30,9 @@ class CelulaController {
             if($celulas) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($celulas);
+
+                $app->response->setBody(json_encode($celulas,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
+
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);

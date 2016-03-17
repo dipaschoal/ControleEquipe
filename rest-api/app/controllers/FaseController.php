@@ -30,7 +30,8 @@ class FaseController {
             if($fases) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($fases);
+                $app->response->setBody(json_encode($fases,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
+
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);

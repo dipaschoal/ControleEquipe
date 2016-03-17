@@ -30,7 +30,8 @@ class TipoAlocacaoController {
             if($tiposAlocacao) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($tiposAlocacao);
+                $app->response->setBody(json_encode($tiposAlocacao,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
+
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);

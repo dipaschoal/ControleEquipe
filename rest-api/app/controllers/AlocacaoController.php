@@ -34,17 +34,18 @@ class AlocacaoController {
                                                 ,alocacao.idcelula
                                                 ,celula.nomecelula
                                                 ,(alocacaorecurso.idalocacao) IS NOT NULL AS flagAlocacaoAlocada
-                                        FROM alocacao
-                                        INNER JOIN tipoalocacao
-                                            ON alocacao.idtipoalocacao = tipoalocacao.idtipoalocacao
-                                        INNER JOIN responsavel
-                                            ON alocacao.idresponsavel = responsavel.idresponsavel
-                                        INNER JOIN celula
-                                            ON alocacao.idcelula = celula.idcelula
-                                        LEFT JOIN fase
-                                            ON alocacao.idfase = fase.idfase
-                                        LEFT JOIN alocacaorecurso
-                                            ON alocacao.idalocacao = alocacaorecurso.idalocacao");
+                                            FROM alocacao
+                                            INNER JOIN tipoalocacao
+                                                ON alocacao.idtipoalocacao = tipoalocacao.idtipoalocacao
+                                            INNER JOIN responsavel
+                                                ON alocacao.idresponsavel = responsavel.idresponsavel
+                                            INNER JOIN celula
+                                                ON alocacao.idcelula = celula.idcelula
+                                            LEFT JOIN fase
+                                                ON alocacao.idfase = fase.idfase
+                                            LEFT JOIN alocacaorecurso
+                                                ON alocacao.idalocacao = alocacaorecurso.idalocacao
+                                            GROUP BY alocacao.idalocacao");
             $sth->execute();
 
             $alocacoes = $sth->fetchAll(PDO::FETCH_OBJ);
@@ -52,7 +53,9 @@ class AlocacaoController {
             if($alocacoes) {
                 $app->response->setStatus(200);
                 $app->response()->headers->set('Content-Type', 'application/json');
-                echo json_encode($alocacoes);
+
+                $app->response->setBody(json_encode($alocacoes,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
+
                 $connection = null;
             } else {
                 $app->response()->setStatus(204);
@@ -115,7 +118,7 @@ class AlocacaoController {
 
             $connection = null;
 
-            echo json_encode($alocacao);
+            $app->response->setBody(json_encode($alocacao,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
 
         } catch(PDOException $e) {
             $app->response()->setStatus(400);
@@ -166,7 +169,7 @@ class AlocacaoController {
 
             $connection = null;
 
-            echo json_encode($alocacao);
+            $app->response->setBody(json_encode($alocacao,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK));
 
         } catch(PDOException $e) {
             $app->response()->setStatus(400);
@@ -202,6 +205,5 @@ class AlocacaoController {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
     }
-
 }
 ?>

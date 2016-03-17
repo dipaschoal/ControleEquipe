@@ -12,23 +12,20 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label" for="recursoSelect">Recurso:</label>
-                        <select class="form-control" name="idrecurso" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.idrecurso" required>
+                        <select class="form-control" name="idrecurso" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.idrecurso" ng-options="recurso.idrecurso as recurso.nomerecurso for recurso in cadastroAlocacaoRecursoController.recursos" required>
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{recurso.idrecurso}}" ng-repeat="recurso in cadastroAlocacaoRecursoController.recursos">{{recurso.nomerecurso}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label" for="alocacaoSelect">Aloca&ccedil;&atilde;o:</label>
-                        <select class="form-control" name="idalocacao" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.idalocacao" required>
+                        <select class="form-control" name="idalocacao" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.idalocacao" ng-options="alocacao.idalocacao as alocacao.nomealocacao for alocacao in cadastroAlocacaoRecursoController.alocacoes" required>
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{alocacao.idalocacao}}" ng-repeat="alocacao in cadastroAlocacaoRecursoController.alocacoes">{{alocacao.nomealocacao}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label" for="papelAtuacaoSelect">Papel de Atua&ccedil;&atilde;o:</label>
-                        <select class="form-control" name="papelAtuacaoSelect" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.idpapelatuacao" required>
+                        <select class="form-control" name="papelAtuacaoSelect" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.idpapelatuacao" ng-options="papelatuacao.idpapelatuacao as papelatuacao.descricaopapel for papelatuacao in cadastroAlocacaoRecursoController.papeisAtuacao" required>
                             <option value="" disabled>- Selecione -</option>
-                            <option value="{{papelatuacao.idpapelatuacao}}" ng-repeat="papelatuacao in cadastroAlocacaoRecursoController.papeisAtuacao">{{papelatuacao.descricaopapel}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-2">
@@ -41,12 +38,12 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label class="control-label" for="quantidadehoras">Quantidade de Horas:</label>
-                        <input class="form-control" type="number" name="quantidadehoras" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.quantidadehoras" required>
+                        <input class="form-control" type="number" string-to-number name="quantidadehoras" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.quantidadehoras" required>
                     </div>
                     <div class="form-group col-md-2">
                         <label class="control-label" for="flagpontofocal">&Eacute; ponto focal?
                             <div>
-                                <input class="checkbox-inline checkbox" type="checkbox" name="flagpontofocal" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal">
+                                <input class="checkbox-inline checkbox" type="checkbox" name="flagpontofocal" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal" ng-true-value="1" ng-false-value="0">
                                 <p class="checkbox-inline" ng-show="cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal">Sim</p>
                                 <p class="checkbox-inline" ng-show="!cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal">N&atilde;o</p>
                             </div>
@@ -55,7 +52,7 @@
                     <div class="form-group col-md-2">
                         <label class="control-label" for="flagalocacaorecursoativa">Aloca&ccedil;&atilde;o Ativa?
                             <div>
-                                <input class="checkbox-inline checkbox" type="checkbox" name="flagalocacaorecursoativa" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa">
+                                <input class="checkbox-inline checkbox" type="checkbox" name="flagalocacaorecursoativa" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa" ng-true-value="1" ng-false-value="0">
                                 <p class="checkbox-inline" ng-show="cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa">Sim</p>
                                 <p class="checkbox-inline" ng-show="!cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa">N&atilde;o</p>
                             </div>
@@ -156,10 +153,10 @@
                                         {{alocacaorecurso.descricaopapel}}
                                     </td>
                                     <td class="col-md-2">
-                                        {{alocacaorecurso.datainicioalocacao | date:'dd/MM/yyy'}}
+                                        {{alocacaorecurso.datainicioalocacao | date:'dd/MM/yyyy'}}
                                     </td>
                                     <td class="col-md-2">
-                                        {{alocacaorecurso.datafimalocacao | date:'dd/MM/yyy'}}
+                                        {{alocacaorecurso.datafimalocacao | date:'dd/MM/yyyy'}}
                                     </td>
                                     <td class="col-md-1">
                                         {{alocacaorecurso.quantidadehoras}}
@@ -193,8 +190,8 @@
             <p>idrecurso: {{cadastroAlocacaoRecursoController.alocacaorecurso.idrecurso}}</p>
             <p>idalocacao: {{cadastroAlocacaoRecursoController.alocacaorecurso.idalocacao}}</p>
             <p>idpapelatuacao: {{cadastroAlocacaoRecursoController.alocacaorecurso.idpapelatuacao}}</p>
-            <p>datainicioalocacao: {{ cadastroAlocacaoRecursoController.alocacaorecurso.datainicioalocacao }}</p>
-            <p>datafimalocacao: {{ cadastroAlocacaoRecursoController.alocacaorecurso.datafimalocacao }}</p>
+            <p>datainicioalocacao: {{ cadastroAlocacaoRecursoController.alocacaorecurso.datainicioalocacao | date:'dd/MM/yyyy'}}</p>
+            <p>datafimalocacao: {{ cadastroAlocacaoRecursoController.alocacaorecurso.datafimalocacao | date:'dd/MM/yyyy'}}</p>
             <p>quantidadehoras: {{ cadastroAlocacaoRecursoController.alocacaorecurso.quantidadehoras }}</p>
             <p>flagpontofocal: {{ cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal }}</p>
             <p>flagalocacaorecursoativa: {{ cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa }}</p>
