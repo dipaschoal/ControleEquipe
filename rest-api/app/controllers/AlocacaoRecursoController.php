@@ -31,8 +31,8 @@ class AlocacaoRecursoController {
                                                 ,papelatuacao.descricaopapel
                                                 ,alocacaorecurso.flagpontofocal
                                                 ,alocacaorecurso.flagalocacaorecursoativa
-                                                ,alocacaorecurso.datainicioalocacao
-                                                ,alocacaorecurso.datafimalocacao
+                                                ,UNIX_TIMESTAMP(alocacaorecurso.datainicioalocacao) * 1000 AS datainicioalocacao
+                                                ,UNIX_TIMESTAMP(alocacaorecurso.datafimalocacao) * 1000 AS datafimalocacao
                                                 ,alocacaorecurso.quantidadehoras
                                                 ,(lancamento.idalocacaorecurso) IS NOT NULL AS flagAlocacaoRecursoLancada
                                             FROM alocacaorecurso INNER JOIN alocacao

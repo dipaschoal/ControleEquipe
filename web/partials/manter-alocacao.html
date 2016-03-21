@@ -142,7 +142,7 @@
                                         </button>
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="alocacao.flagAlocacaoAlocada == true" ng-click="cadastroAlocacaoController.deleteAlocacao(alocacao.idalocacao)">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="alocacao.flagAlocacaoAlocada" ng-click="cadastroAlocacaoController.deleteAlocacao(alocacao.idalocacao)">
                                             <i class="glyphicon glyphicon-trash"></i>
                                         </button>
                                     </td>
@@ -154,6 +154,7 @@
             </fieldset>
         </form>
 
+<!--
         <div class="alert alert alert-info">
             <p>message: {{cadastroAlocacaoController.message}}</p>
             <p>idalocacao: {{cadastroAlocacaoController.alocacao.idalocacao}}</p>
@@ -164,6 +165,7 @@
             <p>idfase: {{ cadastroAlocacaoController.alocacao.idfase }}</p>
             <p>numeroalocacao: {{ cadastroAlocacaoController.alocacao.numeroalocacao }}</p>
         </div>
+-->
 
     </div>
 </div>

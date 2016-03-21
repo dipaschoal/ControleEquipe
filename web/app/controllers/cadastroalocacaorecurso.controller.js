@@ -1,8 +1,15 @@
 (function () {
     'use strict';
-    angular.module('ControleEquipeApp').controller('CadastroAlocacaoRecursoController', CadastroAlocacaoRecursoController);
+    angular.module('ControleEquipeApp').controller('CadastroAlocacaoRecursoController', CadastroAlocacaoRecursoController).filter('boolText', boolText);
 
     CadastroAlocacaoRecursoController.$inject = ['AlocacaoService', 'RecursoService', 'PapelAtuacaoService', 'AlocacaoRecursoService'];
+
+    function boolText() {
+        return function boolText(boolValue) {
+
+            return boolValue ? "Sim" : "Não";
+        }
+    }
 
     function CadastroAlocacaoRecursoController(AlocacaoService, RecursoService, PapelAtuacaoService, AlocacaoRecursoService) {
         var vm = this;
@@ -142,9 +149,8 @@
         function limparCadastro() {
             vm.alocacaorecurso = null;
             vm.alocacaorecurso = {
-                flagpontofocal: false,
-                flagalocacaorecursoativa: true,
-                quantidadehoras: 0.0
+                flagpontofocal: 0,
+                flagalocacaorecursoativa: 1
             };
 
             vm.isEdicao = false;
@@ -164,9 +170,8 @@
             vm.alocacaorecurso = angular.copy(alocacaoRecursoToUpdate);
             vm.alocacaorecurso.datainicioalocacao = new Date(alocacaoRecursoToUpdate.datainicioalocacao);
             vm.alocacaorecurso.datafimalocacao = new Date(alocacaoRecursoToUpdate.datafimalocacao);
-
             vm.isEdicao = true;
-            //            vm.goToElement();
+
         }
     }
 }());

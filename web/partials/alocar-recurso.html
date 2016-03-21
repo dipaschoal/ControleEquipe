@@ -28,11 +28,11 @@
                             <option value="" disabled>- Selecione -</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <label class="control-label" for="datainicioalocacao">Data In&iacute;cio:</label>
                         <input class="form-control" type="date" name="datainicioalocacao" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.datainicioalocacao" placeholder="dd/mm/yyyy" required>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <label class="control-label" for="datafimalocacao">Data Fim:</label>
                         <input class="form-control" type="date" name="datafimalocacao" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.datafimalocacao" placeholder="dd/mm/yyyy" required>
                     </div>
@@ -44,8 +44,7 @@
                         <label class="control-label" for="flagpontofocal">&Eacute; ponto focal?
                             <div>
                                 <input class="checkbox-inline checkbox" type="checkbox" name="flagpontofocal" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal" ng-true-value="1" ng-false-value="0">
-                                <p class="checkbox-inline" ng-show="cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal">Sim</p>
-                                <p class="checkbox-inline" ng-show="!cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal">N&atilde;o</p>
+                                <p class="checkbox-inline">{{cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal | boolText}}</p>
                             </div>
                         </label>
                     </div>
@@ -53,8 +52,7 @@
                         <label class="control-label" for="flagalocacaorecursoativa">Aloca&ccedil;&atilde;o Ativa?
                             <div>
                                 <input class="checkbox-inline checkbox" type="checkbox" name="flagalocacaorecursoativa" ng-model="cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa" ng-true-value="1" ng-false-value="0">
-                                <p class="checkbox-inline" ng-show="cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa">Sim</p>
-                                <p class="checkbox-inline" ng-show="!cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa">N&atilde;o</p>
+                                <p class="checkbox-inline">{{cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa | boolText}}</p>
                             </div>
                         </label>
                     </div>
@@ -162,10 +160,10 @@
                                         {{alocacaorecurso.quantidadehoras}}
                                     </td>
                                     <td class="col-md-1">
-                                        {{alocacaorecurso.flagpontofocal}}
+                                        {{alocacaorecurso.flagpontofocal | boolText}}
                                     </td>
                                     <td class="col-md-1">
-                                        {{alocacaorecurso.flagalocacaorecursoativa}}
+                                        {{alocacaorecurso.flagalocacaorecursoativa | boolText}}
                                     </td>
                                     <td class="col-md-1 col-sm-1">
                                         <button type="button" class="btn btn-sm btn-default" ng-click="cadastroAlocacaoRecursoController.editarAlocacaoRecurso(alocacaorecurso)">
@@ -173,7 +171,7 @@
                                         </button>
                                     </td>
                                     <td class="col-md-1 col-sm-1">
-                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="!alocacaorecurso.flagAlocacaoRecursoLancada" ng-click="cadastroAlocacaoRecursoController.deleteAlocacaoRecurso(alocacaorecurso.idalocacaorecurso)">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="alocacaorecurso.flagAlocacaoRecursoLancada" ng-click="cadastroAlocacaoRecursoController.deleteAlocacaoRecurso(alocacaorecurso.idalocacaorecurso)">
                                             <i class="glyphicon glyphicon-trash"></i>
                                         </button>
                                     </td>
@@ -184,6 +182,7 @@
                 </div>
             </fieldset>
         </form>
+        <!--
 
         <div class="alert alert alert-info">
             <p>message: {{cadastroAlocacaoRecursoController.message}}</p>
@@ -196,6 +195,7 @@
             <p>flagpontofocal: {{ cadastroAlocacaoRecursoController.alocacaorecurso.flagpontofocal }}</p>
             <p>flagalocacaorecursoativa: {{ cadastroAlocacaoRecursoController.alocacaorecurso.flagalocacaorecursoativa }}</p>
         </div>
+-->
 
     </div>
 </div>
