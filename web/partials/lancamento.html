@@ -1,3 +1,185 @@
-<div class="container">
-    <div class="alert alert alert-warning">{{ cadastroLancamentoController.message }}</div>
+<div>
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="display-3">Controle de Lan&ccedil;amentos</h2>
+            <p class="lead">Controle dos lan&ccedil;amentos da equipe CDS Sinistro Auto.</p>
+        </div>
+    </div>
+    <div class="container">
+        <form name="cadastroLancamentoForm">
+            <fieldset class="fieldSet">
+                <legend id="legenda">Informe os dados da lan&ccedil;amentos.</legend>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="recursoSelect">Recurso:</label>
+                        <select class="form-control" name="idrecurso" ng-model="cadastroLancamentoController.lancamento.idrecurso" ng-options="recurso.idrecurso as recurso.nomerecurso for recurso in cadastroLancamentoController.recursos" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="alocacaoSelect">Aloca&ccedil;&atilde;o:</label>
+                        <select class="form-control" name="idalocacao" ng-model="cadastroLancamentoController.lancamento.idalocacao" ng-options="alocacao.idalocacao as alocacao.nomealocacao for alocacao in cadastroLancamentoController.alocacoes" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="faseSelect">Fase:</label>
+                        <select class="form-control" name="faseSelecfaset" ng-model="cadastroLancamentoController.lancamento.idfase" ng-options="fase.idfase as fase.descricaofase for fase in cadastroLancamentoController.fases" required>
+                            <option value="" disabled>- Selecione -</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="datalancamento">Data Lan&ccedil;amento:</label>
+                        <input class="form-control" type="date" name="datalancamento" ng-model="cadastroLancamentoController.lancamento.datalancamento" placeholder="dd/mm/yyyy" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="descricaotarefa">Descri&ccedil;&atilde;o Tarefa:</label>
+                        <input class="form-control" type="text" name="descricaotarefa" ng-model="cadastroLancamentoController.lancamento.descricaotarefa" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="quantidadehoras">Quantidade de Horas:</label>
+                        <input class="form-control" type="number" string-to-number name="quantidadehoras" ng-model="cadastroLancamentoController.lancamento.quantidadehoras" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3 col-sm-6">
+                        <button type="button" class="btn btn-primary" ng-disabled="cadastroLancamentoForm.$invalid && !cadastroLancamentoForm.$touch" ng-hide="cadastroLancamentoController.isEdicao" ng-click="cadastroLancamentoController.addLancamento()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-disabled="cadastroLancamentoForm.$invalid && !cadastroLancamentoForm.$touch" ng-show="cadastroLancamentoController.isEdicao" ng-click="cadastroLancamentoController.updateLancamento()">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Confirmar Edi&ccedil;&atilde;o
+                        </button>
+                    </div>
+                    <div class="form-group col-md-3 col-sm-6">
+                        <button type="button" class="btn btn-secondary" ng-click="cadastroLancamentoController.limparCadastro()">
+                            <span class="glyphicon glyphicon-erase"></span> Limpar
+                        </button>
+                    </div>
+                </div>
+                <div class="row" ng-show="cadastroLancamentoController.lancamentos.length > 0">
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Filtrar resultados" ng-model="cadastroLancamentoController.pesquisarLancamento">
+                        </div>
+                    </div>
+                    <div class="col-md-12 bodycontainer scrollable">
+                        <table class="table table-hover table-scrollable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'nomerecurso' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">Recurso
+                                            <span ng-show="cadastroLancamentoController.sortType == 'nomerecurso' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'nomerecurso' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'nomealocacao' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">Aloca&ccedil;&atilde;o
+                                            <span ng-show="cadastroLancamentoController.sortType == 'nomealocacao' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'nomealocacao' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'descricaopapel' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">
+                                            Papel Atua&ccedil;&atilde;o
+                                            <span ng-show="cadastroLancamentoController.sortType == 'descricaopapel' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'descricaopapel' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'datainicioalocacao' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">
+                                            Data In&iacute;cio
+                                            <span ng-show="cadastroLancamentoController.sortType == 'datainicioalocacao' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'datainicioalocacao' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'datafimalocacao' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">
+                                            Data Fim
+                                            <span ng-show="cadastroLancamentoController.sortType == 'datafimalocacao' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'datafimalocacao' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'quantidadehoras' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">
+                                            Quantidade Horas
+                                            <span ng-show="cadastroLancamentoController.sortType == 'quantidadehoras' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'quantidadehoras' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'flagpontofocal' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">
+                                            Ponto Focal
+                                            <span ng-show="cadastroLancamentoController.sortType == 'flagpontofocal' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'flagpontofocal' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn-link" ng-click="cadastroLancamentoController.sortType = 'flagalocacaorecursoativa' ; cadastroLancamentoController.sortReverse = !cadastroLancamentoController.sortReverse">
+                                            Aloca&ccedil;&atilde;o Ativa
+                                            <span ng-show="cadastroLancamentoController.sortType == 'flagalocacaorecursoativa' && !cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                            <span ng-show="cadastroLancamentoController.sortType == 'flagalocacaorecursoativa' && cadastroLancamentoController.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="alocacaorecurso in cadastroLancamentoController.alocacoesRecurso | orderBy:cadastroLancamentoController.sortType:cadastroLancamentoController.sortReverse | filter:cadastroLancamentoController.pesquisarLancamento track by $index">
+                                    <th class="col-md-2">
+                                        {{alocacaorecurso.nomerecurso}}
+                                    </th>
+                                    <td class="col-md-2">
+                                        {{alocacaorecurso.nomealocacao}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{alocacaorecurso.descricaopapel}}
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{alocacaorecurso.datainicioalocacao | date:'dd/MM/yyyy'}}
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{alocacaorecurso.datafimalocacao | date:'dd/MM/yyyy'}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{alocacaorecurso.quantidadehoras}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{alocacaorecurso.flagpontofocal | boolText}}
+                                    </td>
+                                    <td class="col-md-1">
+                                        {{alocacaorecurso.flagalocacaorecursoativa | boolText}}
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-click="cadastroLancamentoController.editarAlocacaoRecurso(alocacaorecurso)">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td class="col-md-1 col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-default" ng-disabled="alocacaorecurso.flagAlocacaoRecursoLancada" ng-click="cadastroLancamentoController.deleteAlocacaoRecurso(alocacaorecurso.idalocacaorecurso)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--
+
+        <div class="alert alert alert-info">
+            <p>message: {{cadastroLancamentoController.message}}</p>
+            <p>idrecurso: {{cadastroLancamentoController.lancamento.idrecurso}}</p>
+            <p>idalocacao: {{cadastroLancamentoController.lancamento.idalocacao}}</p>
+            <p>idpapelatuacao: {{cadastroLancamentoController.lancamento.idpapelatuacao}}</p>
+            <p>datainicioalocacao: {{ cadastroLancamentoController.lancamento.datainicioalocacao | date:'dd/MM/yyyy'}}</p>
+            <p>datafimalocacao: {{ cadastroLancamentoController.lancamento.datafimalocacao | date:'dd/MM/yyyy'}}</p>
+            <p>quantidadehoras: {{ cadastroLancamentoController.lancamento.quantidadehoras }}</p>
+            <p>flagpontofocal: {{ cadastroLancamentoController.lancamento.flagpontofocal }}</p>
+            <p>flagalocacaorecursoativa: {{ cadastroLancamentoController.lancamento.flagalocacaorecursoativa }}</p>
+        </div>
+-->
+
+    </div>
 </div>
