@@ -4,8 +4,8 @@
 
     FaseService.$inject = ['$http'];
 
-    //    var host = "localhost";
-    var host = "172.18.28.73";
+        var host = "localhost";
+//    var host = "172.18.28.73";
 
     function FaseService($http) {
 
